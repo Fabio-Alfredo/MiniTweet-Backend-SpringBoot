@@ -4,7 +4,7 @@ import com.task.minitweet.domains.models.Token;
 import com.task.minitweet.domains.models.User;
 
 public interface UserService {
-    User findByUsernameOrEmail(String username, String email);
+    User findByIdentifier(String identifier);
     User findByEmail(String email);
 
     Token registerToken(User user);
