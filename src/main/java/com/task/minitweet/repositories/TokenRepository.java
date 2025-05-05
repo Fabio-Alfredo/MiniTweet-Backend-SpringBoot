@@ -1,4 +1,4 @@
-package com.task.minitweet.domains.repositories;
+package com.task.minitweet.repositories;
 
 import com.task.minitweet.domains.models.Token;
 import com.task.minitweet.domains.models.User;

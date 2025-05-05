@@ -1,4 +1,4 @@
-package com.task.minitweet.domains.utils;
+package com.task.minitweet.utils;
 
 import com.task.minitweet.domains.models.User;
 import io.jsonwebtoken.JwtParser;
