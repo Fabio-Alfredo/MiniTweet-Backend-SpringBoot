@@ -26,6 +26,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Token>tokens;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Roles> roles;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
