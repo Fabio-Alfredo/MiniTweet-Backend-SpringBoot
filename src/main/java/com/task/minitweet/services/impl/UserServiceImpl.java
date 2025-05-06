@@ -52,7 +52,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Token loginUser(String identifier, String password) {
-        return null;
+        try{
+            User user = userRepository.findByUsernameOrEmail(identifier, identifier);
+            if(user == null || !passwordEncoder.matches(password, user.getPassword())){
+                throw new HttpError(HttpStatus.UNAUTHORIZED, "Invalid credentials");
+            }
+            Token token = registerToken(user);
+            return token;
+        }catch (HttpError e){
+            throw e;
+        }
     }
 
     @Override
