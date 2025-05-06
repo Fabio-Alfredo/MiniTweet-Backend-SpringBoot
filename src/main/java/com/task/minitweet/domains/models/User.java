@@ -1,5 +1,6 @@
 package com.task.minitweet.domains.models;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,8 +18,12 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(50)")
     private String username;
+    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(50)")
     private String email;
+    @Column(nullable = false, columnDefinition = "VARCHAR(100)")
     private String password;
     private String biography;
     private String profilePicture;

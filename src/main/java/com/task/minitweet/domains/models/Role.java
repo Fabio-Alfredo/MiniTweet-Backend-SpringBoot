@@ -1,10 +1,7 @@
 package com.task.minitweet.domains.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
@@ -16,6 +13,7 @@ public class Role {
 
     @Id
     private String id;
+    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(50)")
     private String name;
 
     @ManyToMany(mappedBy = "roles")
