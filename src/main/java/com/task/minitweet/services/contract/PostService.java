@@ -12,4 +12,5 @@ public interface PostService {
     List<Post>findAllPosts();
     Post findPostById(UUID id);
     void deletePostByIdAndUser(UUID id, User user);
+    List<Post>findAllPostsByUser(User user, Boolean isOwner);
 }
