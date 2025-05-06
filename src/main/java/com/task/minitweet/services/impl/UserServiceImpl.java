@@ -1,5 +1,6 @@
 package com.task.minitweet.services.impl;
 
+import com.task.minitweet.domains.dtos.auth.RegisterUserDto;
 import com.task.minitweet.domains.models.Token;
 import com.task.minitweet.domains.models.User;
 import com.task.minitweet.exceptions.HttpError;
@@ -7,8 +8,10 @@ import com.task.minitweet.repositories.TokenRepository;
 import com.task.minitweet.repositories.UserRepository;
 import com.task.minitweet.services.contract.UserService;
 import com.task.minitweet.utils.JWTTools;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +22,37 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final JWTTools jwtTools;
     private final TokenRepository tokenRepository;
+    private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
 
-    public UserServiceImpl(UserRepository userRepository, JWTTools jwtTools, TokenRepository tokenRepository) {
+    public UserServiceImpl(UserRepository userRepository, JWTTools jwtTools, TokenRepository tokenRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.jwtTools = jwtTools;
         this.tokenRepository = tokenRepository;
+        this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public void registerUser(RegisterUserDto userDto) {
+        try{
+            User user = userRepository.findByUsernameOrEmail(userDto.getUsername(), userDto.getEmail());
+            if(user != null){
+                throw new HttpError(HttpStatus.CONFLICT, "User already exists, username or email is already taken");
+            }
+            userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            user = modelMapper.map(userDto, User.class);
+
+            userRepository.save(user);
+        }catch (HttpError e){
+            throw e;
+        }
+    }
+
+    @Override
+    public Token loginUser(String identifier, String password) {
+        return null;
     }
 
     @Override
