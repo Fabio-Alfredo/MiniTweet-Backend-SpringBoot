@@ -27,7 +27,7 @@ public class User implements UserDetails {
     private List<Token>tokens;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Roles> roles;
+    private List<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

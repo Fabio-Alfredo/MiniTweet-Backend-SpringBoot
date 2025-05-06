@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "roles")
-public class Roles {
+public class Role {
 
     @Id
     private String id;
