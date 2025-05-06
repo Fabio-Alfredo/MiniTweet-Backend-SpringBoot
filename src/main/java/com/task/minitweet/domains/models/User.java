@@ -34,6 +34,12 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    private List<Post> posts;
+
+    @ManyToMany(mappedBy = "likedBy", fetch = FetchType.LAZY)
+    private List<Post> likedPosts;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
