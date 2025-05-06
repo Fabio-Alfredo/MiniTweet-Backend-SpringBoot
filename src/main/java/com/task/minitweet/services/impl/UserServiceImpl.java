@@ -6,6 +6,7 @@ import com.task.minitweet.domains.models.User;
 import com.task.minitweet.exceptions.HttpError;
 import com.task.minitweet.repositories.TokenRepository;
 import com.task.minitweet.repositories.UserRepository;
+import com.task.minitweet.services.contract.RoleService;
 import com.task.minitweet.services.contract.UserService;
 import com.task.minitweet.utils.JWTTools;
 import org.modelmapper.ModelMapper;
@@ -24,14 +25,16 @@ public class UserServiceImpl implements UserService {
     private final TokenRepository tokenRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
 
-    public UserServiceImpl(UserRepository userRepository, JWTTools jwtTools, TokenRepository tokenRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, JWTTools jwtTools, TokenRepository tokenRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.userRepository = userRepository;
         this.jwtTools = jwtTools;
         this.tokenRepository = tokenRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     @Override
@@ -43,6 +46,7 @@ public class UserServiceImpl implements UserService {
             }
             userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
             user = modelMapper.map(userDto, User.class);
+            user.setRoles(List.of(roleService.findRoleById("USER")));
 
             userRepository.save(user);
         }catch (HttpError e){
