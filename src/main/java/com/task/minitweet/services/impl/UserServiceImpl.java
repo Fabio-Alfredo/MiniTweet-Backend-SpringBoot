@@ -137,12 +137,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserAuthenticated() {
         try{
-            String email = SecurityContextHolder
+            String identifier = SecurityContextHolder
                     .getContext()
                     .getAuthentication()
                     .getName();
 
-            User user = findByEmail(email);
+            User user = findByIdentifier(identifier);
             return user;
         }catch (HttpError e){
             throw e;
