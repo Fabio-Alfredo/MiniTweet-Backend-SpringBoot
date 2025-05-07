@@ -81,7 +81,7 @@ public class PostController {
 
             postService.deletePostByIdAndUser(postId, user);
             return GeneralResponse.getResponse(HttpStatus.OK, "Post deleted successfully");
-        }catch (HttpError e){x
+        }catch (HttpError e){
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
         }
     }

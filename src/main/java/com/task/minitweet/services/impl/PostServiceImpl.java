@@ -55,19 +55,69 @@ public class PostServiceImpl implements PostService {
         }
     }
 
+    /**
+     * Este método busca todos los posts.
+     * Si no se encuentran posts, se lanza una excepción HttpError con el código 404.
+     *
+     * @return Una lista de posts.
+     * @throws HttpError Si no se encuentran posts.
+     */
     @Override
     public List<Post> findAllPosts() {
-        return List.of();
+        try {
+            List<Post> posts = postRepository.findAll();
+            if(posts.isEmpty()){
+                throw new HttpError(HttpStatus.NOT_FOUND, "No posts found");
+            }
+            return posts.stream()
+                    .map(post -> modelMapper.map(post, Post.class))
+                    .toList();
+        }catch (HttpError e){
+            throw e;
+        }
     }
 
+    /**
+     * Este método busca un post por su ID.
+     * Si no se encuentra el post, se lanza una excepción HttpError con el código 404.
+     *
+     * @param id El ID del post a buscar.
+     * @return El post encontrado.
+     * @throws HttpError Si no se encuentra el post.
+     */
     @Override
-    public Post findPostById(UUID id) {
-        return null;
+    public FindPostDto findPostById(UUID id) {
+        try {
+         Post post = postRepository.findById(id).orElse(null);
+         if(post == null){
+             throw new HttpError(HttpStatus.NOT_FOUND, "Post not found");
+         }
+
+         return modelMapper.map(post, FindPostDto.class);
+        }catch (HttpError e){
+            throw e;
+        }
     }
 
+    /**
+     * Este método elimina un post por su ID y el usuario que lo creó.
+     * Si el post no se encuentra, se lanza una excepción HttpError con el código 404.
+     *
+     * @param id El ID del post a eliminar.
+     * @param user El usuario que creó el post.
+     * @throws HttpError Si no se encuentra el post o si no es el propietario del post.
+     */
     @Override
     public void deletePostByIdAndUser(UUID id, User user) {
-
+        try{
+            Post post = postRepository.findByIdAndAuthor(id, user);
+            if(post == null){
+                throw new HttpError(HttpStatus.NOT_FOUND, "Post not found");
+            }
+            postRepository.delete(post);
+        }catch (HttpError e) {
+            throw e;
+        }
     }
 
     /**
