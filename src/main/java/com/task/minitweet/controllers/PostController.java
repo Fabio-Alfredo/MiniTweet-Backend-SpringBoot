@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -52,5 +53,38 @@ public class PostController {
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
         }
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<GeneralResponse>findAllPosts(){
+        try{
+            List<Post>posts = postService.findAllPosts();
+            return GeneralResponse.getResponse(HttpStatus.OK, "success", posts);
+        }catch (HttpError e){
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @GetMapping("/by-id/{postId}")
+    public ResponseEntity<GeneralResponse>findPostById(@PathVariable UUID postId){
+        try{
+            FindPostDto post = postService.findPostById(postId);
+            return GeneralResponse.getResponse(HttpStatus.OK, "success", post);
+        }catch (HttpError e){
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete/{postId}")
+    public ResponseEntity<GeneralResponse>deletePostById(@PathVariable UUID postId){
+        try{
+            User user = userService.findUserAuthenticated();
+
+            postService.deletePostByIdAndUser(postId, user);
+            return GeneralResponse.getResponse(HttpStatus.OK, "Post deleted successfully");
+        }catch (HttpError e){x
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
 
 }
