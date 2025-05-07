@@ -25,7 +25,6 @@ public class Post {
     private Date createdAt = Date.from(Instant.now());
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnore
     private User author;
 
     @ManyToMany(fetch = FetchType.EAGER)

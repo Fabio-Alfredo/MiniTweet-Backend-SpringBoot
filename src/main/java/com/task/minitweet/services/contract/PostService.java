@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PostService {
-    Post createPost(CreatePostDto postDto);
+    Post createPost(CreatePostDto postDto, User user);
     List<Post>findAllPosts();
     Post findPostById(UUID id);
     void deletePostByIdAndUser(UUID id, User user);

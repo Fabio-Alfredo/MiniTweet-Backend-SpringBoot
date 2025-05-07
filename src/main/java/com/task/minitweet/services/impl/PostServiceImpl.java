@@ -36,7 +36,7 @@ public class PostServiceImpl implements PostService {
      * @throws HttpError Si ocurre un error al subir la imagen a Cloudinary.
      */
     @Override
-    public Post createPost(CreatePostDto postDto) {
+    public Post createPost(CreatePostDto postDto, User user) {
         try {
             String imageUrl = null;
 
@@ -46,6 +46,7 @@ public class PostServiceImpl implements PostService {
 
             Post post = modelMapper.map(postDto, Post.class);
             post.setImage(imageUrl);
+            post.setAuthor(user);
             return  postRepository.save(post);
         }catch (HttpError e){
             throw e;

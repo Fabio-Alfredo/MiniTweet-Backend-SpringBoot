@@ -1,5 +1,6 @@
 package com.task.minitweet.domains.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -35,9 +36,11 @@ public class User implements UserDetails {
     private List<Role> roles;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Post> posts;
 
     @ManyToMany(mappedBy = "likedBy", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Post> likedPosts;
 
     @Override

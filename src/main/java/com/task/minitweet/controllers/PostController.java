@@ -29,7 +29,9 @@ public class PostController {
     @PostMapping("/create")
     public ResponseEntity<GeneralResponse>createNewPost(@ModelAttribute @Valid CreatePostDto postDto){
         try{
-            Post post = postService.createPost(postDto);
+            User user = userService.findUserAuthenticated();
+
+            Post post = postService.createPost(postDto, user);
             return GeneralResponse.getResponse(HttpStatus.CREATED, "Post created successfully", post);
         }catch (HttpError e){
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
