@@ -2,6 +2,7 @@ package com.task.minitweet.controllers;
 
 import com.task.minitweet.domains.dtos.GeneralResponse;
 import com.task.minitweet.domains.dtos.post.CreatePostDto;
+import com.task.minitweet.domains.dtos.post.FindPostDto;
 import com.task.minitweet.domains.models.Post;
 import com.task.minitweet.domains.models.User;
 import com.task.minitweet.exceptions.HttpError;
@@ -31,7 +32,7 @@ public class PostController {
         try{
             User user = userService.findUserAuthenticated();
 
-            Post post = postService.createPost(postDto, user);
+            FindPostDto post = postService.createPost(postDto, user);
             return GeneralResponse.getResponse(HttpStatus.CREATED, "Post created successfully", post);
         }catch (HttpError e){
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());

@@ -1,6 +1,7 @@
 package com.task.minitweet.services.impl;
 
 import com.task.minitweet.domains.dtos.post.CreatePostDto;
+import com.task.minitweet.domains.dtos.post.FindPostDto;
 import com.task.minitweet.domains.models.Post;
 import com.task.minitweet.domains.models.User;
 import com.task.minitweet.exceptions.HttpError;
@@ -36,7 +37,7 @@ public class PostServiceImpl implements PostService {
      * @throws HttpError Si ocurre un error al subir la imagen a Cloudinary.
      */
     @Override
-    public Post createPost(CreatePostDto postDto, User user) {
+    public FindPostDto createPost(CreatePostDto postDto, User user) {
         try {
             String imageUrl = null;
 
@@ -47,7 +48,8 @@ public class PostServiceImpl implements PostService {
             Post post = modelMapper.map(postDto, Post.class);
             post.setImage(imageUrl);
             post.setAuthor(user);
-            return  postRepository.save(post);
+
+            return  modelMapper.map(postRepository.save(post), FindPostDto.class);
         }catch (HttpError e){
             throw e;
         }
