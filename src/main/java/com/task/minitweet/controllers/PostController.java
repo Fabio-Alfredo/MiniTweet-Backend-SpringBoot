@@ -45,7 +45,7 @@ public class PostController {
             User user = userService.findUserAuthenticated();
             Boolean isOwner = user!= null && user.getId().toString().equals(userId);
 
-            List<Post>posts = postService.findAllPostsByUser(user, isOwner);
+            List<FindPostDto>posts = postService.findAllPostsByUser(user, isOwner);
 
             return GeneralResponse.getResponse(HttpStatus.OK, "success", posts);
         }catch (HttpError e){

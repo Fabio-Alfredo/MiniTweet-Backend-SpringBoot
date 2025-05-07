@@ -81,14 +81,17 @@ public class PostServiceImpl implements PostService {
      * @throws HttpError Si no se encuentran posts para el usuario.
      */
     @Override
-    public List<Post> findAllPostsByUser(User user, Boolean isOwner) {
+    public List<FindPostDto> findAllPostsByUser(User user, Boolean isOwner) {
         //Verificar el propietario del post proximamente
         try {
             List<Post> posts = postRepository.findAllByAuthor(user);
             if(posts.isEmpty()){
                 throw new HttpError(HttpStatus.NOT_FOUND, "No posts found for this user");
             }
-            return posts;
+
+            return posts.stream()
+                    .map(post -> modelMapper.map(post, FindPostDto.class))
+                    .toList();
         }catch (HttpError e){
             throw e;
         }
