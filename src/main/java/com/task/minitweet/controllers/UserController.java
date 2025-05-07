@@ -1,0 +1,33 @@
+package com.task.minitweet.controllers;
+
+import com.task.minitweet.domains.dtos.GeneralResponse;
+import com.task.minitweet.domains.models.User;
+import com.task.minitweet.exceptions.HttpError;
+import com.task.minitweet.services.contract.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/user")
+public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<GeneralResponse> getUserInfo() {
+        try {
+            User user = userService.findUserAuthenticated();
+
+            return GeneralResponse.getResponse(HttpStatus.OK, "success", user);
+        } catch (HttpError e) {
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
+}

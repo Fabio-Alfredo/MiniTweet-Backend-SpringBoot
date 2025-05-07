@@ -43,6 +43,16 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Post> likedPosts;
 
+    //Los que me siguen
+    @OneToMany(mappedBy="follower", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Follow> followers;
+
+    //Los qu yo sigo
+    @OneToMany(mappedBy = "followed", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Follow> following;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
