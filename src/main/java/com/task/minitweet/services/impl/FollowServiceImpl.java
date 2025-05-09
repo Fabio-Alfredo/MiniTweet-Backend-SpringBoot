@@ -1,0 +1,58 @@
+package com.task.minitweet.services.impl;
+
+import com.task.minitweet.domains.models.Follow;
+import com.task.minitweet.domains.models.User;
+import com.task.minitweet.exceptions.HttpError;
+import com.task.minitweet.repositories.FollowRepository;
+import com.task.minitweet.services.contract.FollowService;
+import com.task.minitweet.services.contract.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class FollowServiceImpl implements FollowService {
+
+    private final UserService userService;
+    private final FollowRepository followRepository;
+
+
+    public FollowServiceImpl(UserService userService, FollowRepository followRepository) {
+        this.userService = userService;
+        this.followRepository = followRepository;
+    }
+
+    @Override
+    public void followUser(User follower, UUID followed) {
+        try {
+            User followedEntity = userService.findById(followed);
+
+            if(followRepository.existsByFollowerAndFollowed(follower, followedEntity)){
+                throw new HttpError(HttpStatus.CONFLICT, "You already follow this user");
+            }
+
+            Follow follow = new Follow();
+            follow.setFollower(follower);
+            follow.setFollowed(followedEntity);
+
+            followRepository.save(follow);
+        }catch (HttpError e){
+            throw e;
+        }
+    }
+
+    @Override
+    public List<User> findFollowersOf(User user) {
+        try {
+            List<User> followers = followRepository.findFollowersOf(user);
+            if (followers.isEmpty()) {
+                throw new HttpError(HttpStatus.NOT_FOUND, "No followers found");
+            }
+            return followers;
+        } catch (HttpError e) {
+            throw e;
+        }
+    }
+}

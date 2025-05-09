@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -91,6 +92,19 @@ public class UserServiceImpl implements UserService {
             return user;
         }catch (HttpError e){
             throw  e;
+        }
+    }
+
+    @Override
+    public User findById(UUID id) {
+        try {
+            User user = userRepository.findById(id).orElse(null);
+            if(user == null){
+                throw new HttpError(HttpStatus.NOT_FOUND, "User not found");
+            }
+            return user;
+        }catch (HttpError e){
+            throw e;
         }
     }
 
