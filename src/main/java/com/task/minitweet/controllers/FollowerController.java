@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -34,11 +35,13 @@ public class FollowerController {
         }
     }
 
-    @GetMapping("/followers")
-    public ResponseEntity<GeneralResponse> findFollowers() {
+    //Solo los seguidores y el usuario pueden ver los seguidoresio
+    @GetMapping("/followers/{userId}")
+    public ResponseEntity<GeneralResponse> findFollowers(@PathVariable UUID userId) {
         try {
             User user = userService.findUserAuthenticated();
-            return GeneralResponse.getResponse(HttpStatus.OK, "success", followService.findFollowersOf(user));
+            List<User>followers = followService.findFollowersOf(userId, user);
+            return GeneralResponse.getResponse(HttpStatus.OK, "success", followers);
         } catch (HttpError e) {
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
         }

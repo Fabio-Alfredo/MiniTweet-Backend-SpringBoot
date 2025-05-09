@@ -109,6 +109,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAll() {
+        try{
+            List<User> users = userRepository.findAll();
+            if(users.isEmpty()){
+                throw new HttpError(HttpStatus.NOT_FOUND, "No users found");
+            }
+            return users;
+        }catch (HttpError e){
+            throw e;
+        }
+    }
+
+    @Override
     public Token registerToken(User user) {
         try{
             cleanToken(user);

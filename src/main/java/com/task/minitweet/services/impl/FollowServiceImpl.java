@@ -44,8 +44,14 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
-    public List<User> findFollowersOf(User user) {
+    public List<User> findFollowersOf(UUID userId, User authenticatedUser) {
         try {
+
+            User user = userService.findById(userId);
+            if(!user.getId().equals(authenticatedUser.getId()) && !followRepository.existsByFollowerAndFollowed(authenticatedUser, user)){
+                throw new HttpError(HttpStatus.FORBIDDEN, "You are not allowed to see this user's followers");
+            }
+
             List<User> followers = followRepository.findFollowersOf(user);
             if (followers.isEmpty()) {
                 throw new HttpError(HttpStatus.NOT_FOUND, "No followers found");
@@ -55,4 +61,6 @@ public class FollowServiceImpl implements FollowService {
             throw e;
         }
     }
+
+
 }

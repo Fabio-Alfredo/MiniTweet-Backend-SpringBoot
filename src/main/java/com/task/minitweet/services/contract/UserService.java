@@ -4,6 +4,7 @@ import com.task.minitweet.domains.dtos.auth.RegisterUserDto;
 import com.task.minitweet.domains.models.Token;
 import com.task.minitweet.domains.models.User;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
@@ -12,6 +13,7 @@ public interface UserService {
     User findByIdentifier(String identifier);
     User findByEmail(String email);
     User findById(UUID id);
+    List<User> findAll();
 
     Token registerToken(User user);
     Boolean isTokenValid(User user, String token) ;
