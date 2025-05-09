@@ -46,4 +46,16 @@ public class FollowerController {
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
         }
     }
+
+    //Solo los seguidores y el usuario puede ver los seguidos
+    @GetMapping("/followeds/{userId}")
+    public ResponseEntity<GeneralResponse>findFolloweds(@PathVariable UUID userId){
+        try {
+            User user = userService.findUserAuthenticated();
+            List<User>followed = followService.findFollowingOf(userId, user);
+            return GeneralResponse.getResponse(HttpStatus.OK, "success", followed);
+        }catch (HttpError e){
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
 }

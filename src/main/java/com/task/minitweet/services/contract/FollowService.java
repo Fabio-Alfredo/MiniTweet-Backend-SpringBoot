@@ -11,4 +11,7 @@ public interface FollowService {
 
     //funcion para encontrar los seguidores de un usuario
     List<User>findFollowersOf(UUID userId, User authenticatedUser);
+
+    //funcion para encontrar los usuarios que sigue un usuario
+    List<User>findFollowingOf(UUID userId, User authenticatedUser);
 }

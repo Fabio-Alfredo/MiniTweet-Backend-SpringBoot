@@ -62,5 +62,26 @@ public class FollowServiceImpl implements FollowService {
         }
     }
 
+    @Override
+    public List<User> findFollowingOf(UUID userId, User authenticatedUser) {
+        try {
+            User user = userService.findById(userId);
+
+            if(!user.getId().equals(authenticatedUser.getId()) && !followRepository.existsByFollowerAndFollowed(authenticatedUser, user)){
+                throw new HttpError(HttpStatus.FORBIDDEN, "You are not allowed to see this user's following");
+            }
+
+            List<User> following = followRepository.findFollowingOf(user);
+            if (following.isEmpty()) {
+                throw new HttpError(HttpStatus.NOT_FOUND, "No following found");
+            }
+            return following;
+        } catch (HttpError e) {
+            throw e;
+        }
+    }
+
+
+
 
 }
