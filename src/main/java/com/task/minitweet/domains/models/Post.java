@@ -34,4 +34,8 @@ public class Post {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> likedBy;
+
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Comment> comments;
 }

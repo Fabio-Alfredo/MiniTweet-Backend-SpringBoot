@@ -53,6 +53,10 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Follow> following;
 
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Comment> comments;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
