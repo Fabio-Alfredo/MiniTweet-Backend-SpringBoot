@@ -100,6 +100,32 @@ public class PostServiceImpl implements PostService {
     }
 
     /**
+     * Este método actualiza los likes de un post.
+     * Si el usuario ya ha dado like al post, se elimina el like.
+     * Si el usuario no ha dado like al post, se agrega el like.
+     *
+     * @param id El ID del post a actualizar.
+     * @param user El usuario que da like al post.
+     */
+    @Override
+    public void updateLikesInPost(UUID id, User user) {
+        try{
+            Post post = postRepository.findById(id).orElse(null);
+            if(post == null){
+                throw new HttpError(HttpStatus.NOT_FOUND, "Post not found");
+            }
+            if(post.getLikedBy().contains(user)){
+                post.getLikedBy().remove(user);
+            }else{
+                post.getLikedBy().add(user);
+            }
+            postRepository.save(post);
+        }catch (HttpError e){
+            throw e;
+        }
+    }
+
+    /**
      * Este método elimina un post por su ID y el usuario que lo creó.
      * Si el post no se encuentra, se lanza una excepción HttpError con el código 404.
      *

@@ -86,5 +86,17 @@ public class PostController {
         }
     }
 
+    @PostMapping("/like/{postId}")
+    public ResponseEntity<GeneralResponse>likePost(@PathVariable UUID postId){
+        try{
+            User user = userService.findUserAuthenticated();
+
+            postService.updateLikesInPost(postId, user);
+            return GeneralResponse.getResponse(HttpStatus.OK, "Post liked successfully");
+        }catch (HttpError e){
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
 
 }

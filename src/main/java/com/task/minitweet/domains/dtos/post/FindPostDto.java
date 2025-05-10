@@ -14,7 +14,7 @@ public class FindPostDto {
     private String content;
     private String image;
     private Date createdAt;
-    private List<User>likedBy;
+    private List<UserInPostDto>likedBy;
     private UserInPostDto author;
 
 }
