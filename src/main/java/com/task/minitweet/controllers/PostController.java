@@ -99,4 +99,17 @@ public class PostController {
     }
 
 
+    @PutMapping("/update/{postId}")
+    public ResponseEntity<GeneralResponse>updatePost(@PathVariable UUID postId, @ModelAttribute @Valid CreatePostDto postDto){
+        try{
+            User user = userService.findUserAuthenticated();
+
+            FindPostDto post = postService.updatePost(postId, postDto, user);
+            return GeneralResponse.getResponse(HttpStatus.OK, "Post updated successfully", post);
+        }catch (HttpError e){
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+
 }

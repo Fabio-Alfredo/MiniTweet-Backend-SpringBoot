@@ -172,4 +172,28 @@ public class PostServiceImpl implements PostService {
             throw e;
         }
     }
+
+    @Override
+    public FindPostDto updatePost(UUID id, CreatePostDto postDto, User user) {
+        try{
+            Post post = postRepository.findByIdAndAuthor(id, user);
+            if(post == null){
+                throw new HttpError(HttpStatus.NOT_FOUND, "Post not found");
+            }
+            String imageUrl = null;
+
+            if(postDto.getFile() != null) {
+                imageUrl = cloudinaryService.uploadImage(postDto.getFile(), "posts");
+                post.setImage(imageUrl);
+            }
+            if(postDto.getContent()!= null) {
+                post.setContent(postDto.getContent());
+            }
+
+            Post updatedPost = postRepository.save(post);
+            return modelMapper.map(updatedPost, FindPostDto.class);
+        }catch (HttpError e){
+            throw e;
+        }
+    }
 }
