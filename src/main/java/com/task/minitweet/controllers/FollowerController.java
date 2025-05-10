@@ -48,7 +48,7 @@ public class FollowerController {
     }
 
     //Solo los seguidores y el usuario puede ver los seguidos
-    @GetMapping("/followeds/{userId}")
+    @GetMapping("/followed/{userId}")
     public ResponseEntity<GeneralResponse>findFolloweds(@PathVariable UUID userId){
         try {
             User user = userService.findUserAuthenticated();

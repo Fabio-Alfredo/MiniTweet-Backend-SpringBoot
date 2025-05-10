@@ -8,10 +8,12 @@ import jdk.dynalink.linker.LinkerServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/user")
@@ -39,6 +41,16 @@ public class UserController {
         try {
             List<User>users = userService.findAll();
             return GeneralResponse.getResponse(HttpStatus.OK, "success", users);
+        } catch (HttpError e) {
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @GetMapping("/by-id/{id}")
+    public ResponseEntity<GeneralResponse> getUserById(@PathVariable UUID id) {
+        try {
+            User user = userService.findById(id);
+            return GeneralResponse.getResponse(HttpStatus.OK, "success", user);
         } catch (HttpError e) {
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
         }
