@@ -8,6 +8,7 @@ import com.task.minitweet.exceptions.HttpError;
 import com.task.minitweet.repositories.PostRepository;
 import com.task.minitweet.services.contract.CloudinaryService;
 import com.task.minitweet.services.contract.PostService;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,7 @@ public class PostServiceImpl implements PostService {
      * @throws HttpError Si ocurre un error al subir la imagen a Cloudinary.
      */
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public FindPostDto createPost(CreatePostDto postDto, User user) {
         try {
             String imageUrl = null;
@@ -108,6 +110,7 @@ public class PostServiceImpl implements PostService {
      * @param user El usuario que da like al post.
      */
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public void updateLikesInPost(UUID id, User user) {
         try{
             Post post = postRepository.findById(id).orElse(null);
@@ -134,6 +137,7 @@ public class PostServiceImpl implements PostService {
      * @throws HttpError Si no se encuentra el post o si no es el propietario del post.
      */
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public void deletePostByIdAndUser(UUID id, User user) {
         try{
             Post post = postRepository.findByIdAndAuthor(id, user);
@@ -174,6 +178,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public FindPostDto updatePost(UUID id, CreatePostDto postDto, User user) {
         try{
             Post post = postRepository.findByIdAndAuthor(id, user);

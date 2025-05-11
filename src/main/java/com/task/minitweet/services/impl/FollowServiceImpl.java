@@ -6,6 +6,7 @@ import com.task.minitweet.exceptions.HttpError;
 import com.task.minitweet.repositories.FollowRepository;
 import com.task.minitweet.services.contract.FollowService;
 import com.task.minitweet.services.contract.UserService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public void followUser(User follower, UUID followed) {
         try {
             User followedEntity = userService.findById(followed);

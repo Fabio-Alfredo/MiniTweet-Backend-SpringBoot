@@ -9,6 +9,7 @@ import com.task.minitweet.repositories.CommentRepository;
 import com.task.minitweet.repositories.PostRepository;
 import com.task.minitweet.services.contract.CommentService;
 import com.task.minitweet.services.contract.PostService;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +30,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public void createComment(CreateCommentDto commentDto, User author) {
         try{
             Post post = postService.findPostById(commentDto.getPostId());
 
-            Comment comment = modelMapper.map(commentDto, Comment.class);
+            Comment comment = new Comment();
+            comment.setContent(commentDto.getContent());
             comment.setPost(post);
             comment.setAuthor(author);
 

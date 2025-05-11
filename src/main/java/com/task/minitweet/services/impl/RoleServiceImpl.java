@@ -5,6 +5,7 @@ import com.task.minitweet.domains.models.Role;
 import com.task.minitweet.exceptions.HttpError;
 import com.task.minitweet.repositories.RoleRepository;
 import com.task.minitweet.services.contract.RoleService;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public void createRole(CreateRoleDto roleDto) {
         try{
             Role role = roleRepository.findById(roleDto.getId()).orElse(null);

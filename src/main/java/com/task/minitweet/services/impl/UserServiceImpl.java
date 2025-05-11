@@ -9,6 +9,7 @@ import com.task.minitweet.repositories.UserRepository;
 import com.task.minitweet.services.contract.RoleService;
 import com.task.minitweet.services.contract.UserService;
 import com.task.minitweet.utils.JWTTools;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public void registerUser(RegisterUserDto userDto) {
         try{
             User user = userRepository.findByUsernameOrEmail(userDto.getUsername(), userDto.getEmail());
@@ -56,6 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public Token loginUser(String identifier, String password) {
         try{
             User user = userRepository.findByUsernameOrEmail(identifier, identifier);
@@ -122,6 +125,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public Token registerToken(User user) {
         try{
             cleanToken(user);
@@ -151,6 +155,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public void cleanToken(User user) {
         List<Token>token = tokenRepository.findByUserAndActive(user, true);
         token.forEach(t -> {

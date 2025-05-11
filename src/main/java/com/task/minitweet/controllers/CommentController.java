@@ -38,7 +38,7 @@ public class CommentController {
         }
     }
 
-    @PostMapping("/all/{postId}")
+    @GetMapping("/all/{postId}")
     public ResponseEntity<GeneralResponse>findAllComments(@PathVariable UUID postId){
         try{
             List<Comment> comments = commentService.findAllByPostId(postId);
