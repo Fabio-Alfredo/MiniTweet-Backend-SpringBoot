@@ -9,6 +9,7 @@ import com.task.minitweet.exceptions.HttpError;
 import com.task.minitweet.services.contract.PostService;
 import com.task.minitweet.services.contract.UserService;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,12 @@ public class PostController {
 
     private final PostService postService;
     private final UserService userService;
+    private final ModelMapper modelMapper;
 
-    public PostController(PostService postService, UserService userService) {
+    public PostController(PostService postService, UserService userService, ModelMapper modelMapper) {
         this.postService = postService;
         this.userService = userService;
+        this.modelMapper = modelMapper;
     }
 
     @PostMapping("/create")
@@ -67,8 +70,8 @@ public class PostController {
     @GetMapping("/by-id/{postId}")
     public ResponseEntity<GeneralResponse>findPostById(@PathVariable UUID postId){
         try{
-            FindPostDto post = postService.findPostById(postId);
-            return GeneralResponse.getResponse(HttpStatus.OK, "success", post);
+            Post post = postService.findPostById(postId);
+            return GeneralResponse.getResponse(HttpStatus.OK, "success", modelMapper.map(post, FindPostDto.class));
         }catch (HttpError e){
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
         }

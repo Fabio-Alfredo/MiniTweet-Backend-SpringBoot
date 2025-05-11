@@ -86,14 +86,14 @@ public class PostServiceImpl implements PostService {
      * @throws HttpError Si no se encuentra el post.
      */
     @Override
-    public FindPostDto findPostById(UUID id) {
+    public Post findPostById(UUID id) {
         try {
          Post post = postRepository.findById(id).orElse(null);
          if(post == null){
              throw new HttpError(HttpStatus.NOT_FOUND, "Post not found");
          }
 
-         return modelMapper.map(post, FindPostDto.class);
+         return post;
         }catch (HttpError e){
             throw e;
         }

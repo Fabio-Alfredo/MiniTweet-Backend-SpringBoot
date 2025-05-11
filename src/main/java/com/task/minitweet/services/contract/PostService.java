@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface PostService {
     FindPostDto createPost(CreatePostDto postDto, User user);
     List<Post>findAllPosts();
-    FindPostDto findPostById(UUID id);
+    Post findPostById(UUID id);
     void updateLikesInPost(UUID id, User user);
     void deletePostByIdAndUser(UUID id, User user);
     List<FindPostDto>findAllPostsByUser(User user, Boolean isOwner);
