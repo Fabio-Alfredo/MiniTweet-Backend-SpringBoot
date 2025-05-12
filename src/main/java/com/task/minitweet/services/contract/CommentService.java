@@ -1,6 +1,7 @@
 package com.task.minitweet.services.contract;
 
 import com.task.minitweet.domains.dtos.comment.CreateCommentDto;
+import com.task.minitweet.domains.dtos.comment.UpdateCommentDto;
 import com.task.minitweet.domains.models.Comment;
 import com.task.minitweet.domains.models.User;
 
@@ -11,5 +12,7 @@ public interface CommentService {
 
     void createComment(CreateCommentDto commentDto, User author);
     List<Comment>findAllByPostId(UUID postId);
+    void updateComment(UpdateCommentDto commentDto, User author);
+
 
 }

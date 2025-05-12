@@ -2,6 +2,7 @@ package com.task.minitweet.controllers;
 
 import com.task.minitweet.domains.dtos.GeneralResponse;
 import com.task.minitweet.domains.dtos.comment.CreateCommentDto;
+import com.task.minitweet.domains.dtos.comment.UpdateCommentDto;
 import com.task.minitweet.domains.models.Comment;
 import com.task.minitweet.domains.models.User;
 import com.task.minitweet.exceptions.HttpError;
@@ -43,6 +44,17 @@ public class CommentController {
         try{
             List<Comment> comments = commentService.findAllByPostId(postId);
             return GeneralResponse.getResponse(HttpStatus.OK, "success", comments);
+        }catch (HttpError e){
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<GeneralResponse>updateComment( @RequestBody @Valid UpdateCommentDto commentDto){
+        try{
+            User user = userService.findUserAuthenticated();
+            commentService.updateComment(commentDto, user);
+            return GeneralResponse.getResponse(HttpStatus.OK, "Comment updated successfully", null);
         }catch (HttpError e){
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
         }

@@ -1,6 +1,7 @@
 package com.task.minitweet.services.impl;
 
 import com.task.minitweet.domains.dtos.comment.CreateCommentDto;
+import com.task.minitweet.domains.dtos.comment.UpdateCommentDto;
 import com.task.minitweet.domains.models.Comment;
 import com.task.minitweet.domains.models.Post;
 import com.task.minitweet.domains.models.User;
@@ -11,6 +12,7 @@ import com.task.minitweet.services.contract.CommentService;
 import com.task.minitweet.services.contract.PostService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,6 +55,21 @@ public class CommentServiceImpl implements CommentService {
             List<Comment> comments = commentRepository.findAllByPost(post);
 
             return comments;
+        }catch (HttpError e){
+            throw e;
+        }
+    }
+
+    @Override
+    public void updateComment(UpdateCommentDto commentDto, User author) {
+        try{
+            Comment comment = commentRepository.findByIdAndAuthor(commentDto.getId(), author);
+            if(comment == null){
+                throw new HttpError(HttpStatus.NOT_FOUND, "Comment not found");
+            }
+            comment.setContent(commentDto.getContent());
+            commentRepository.save(comment);
+
         }catch (HttpError e){
             throw e;
         }

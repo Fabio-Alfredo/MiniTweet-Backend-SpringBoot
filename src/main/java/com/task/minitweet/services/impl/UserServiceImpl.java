@@ -140,6 +140,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public Boolean isTokenValid(User user, String token) {
         try {
             cleanToken(user);
