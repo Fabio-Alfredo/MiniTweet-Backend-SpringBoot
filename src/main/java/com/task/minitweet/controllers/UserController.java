@@ -58,6 +58,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{userId}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<GeneralResponse> updateUserRole(@PathVariable UUID userId, @RequestBody @Valid UpdateRolesDto updateRolesDto) {
         try {
             userService.updateRoles(userId, updateRolesDto);
