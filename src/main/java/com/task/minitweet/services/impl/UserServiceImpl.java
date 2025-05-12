@@ -1,6 +1,8 @@
 package com.task.minitweet.services.impl;
 
 import com.task.minitweet.domains.dtos.auth.RegisterUserDto;
+import com.task.minitweet.domains.dtos.user.UpdateRolesDto;
+import com.task.minitweet.domains.enums.RoleActions;
 import com.task.minitweet.domains.models.Token;
 import com.task.minitweet.domains.models.User;
 import com.task.minitweet.exceptions.HttpError;
@@ -119,6 +121,22 @@ public class UserServiceImpl implements UserService {
                 throw new HttpError(HttpStatus.NOT_FOUND, "No users found");
             }
             return users;
+        }catch (HttpError e){
+            throw e;
+        }
+    }
+
+    @Override
+    public void updateRoles(UUID user, UpdateRolesDto updateRolesDto) {
+        try{
+            User userToUpdate = findById(user);
+
+            if(updateRolesDto.getAction().equals(RoleActions.ADD)){
+                userToUpdate.getRoles().add(roleService.findRoleById(updateRolesDto.getRoleId()));
+            }else if(updateRolesDto.getAction().equals(RoleActions.REMOVE) && userToUpdate.getRoles().size() > 1){
+                userToUpdate.getRoles().remove(roleService.findRoleById(updateRolesDto.getRoleId()));
+            }
+            userRepository.save(userToUpdate);
         }catch (HttpError e){
             throw e;
         }

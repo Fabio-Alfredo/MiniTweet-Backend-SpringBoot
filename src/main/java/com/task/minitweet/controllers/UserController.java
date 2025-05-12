@@ -1,16 +1,16 @@
 package com.task.minitweet.controllers;
 
 import com.task.minitweet.domains.dtos.GeneralResponse;
+import com.task.minitweet.domains.dtos.user.UpdateRolesDto;
 import com.task.minitweet.domains.models.User;
 import com.task.minitweet.exceptions.HttpError;
 import com.task.minitweet.services.contract.UserService;
+import jakarta.validation.Valid;
 import jdk.dynalink.linker.LinkerServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,6 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<GeneralResponse> getAllUsers() {
         try {
             List<User>users = userService.findAll();
@@ -51,6 +52,16 @@ public class UserController {
         try {
             User user = userService.findById(id);
             return GeneralResponse.getResponse(HttpStatus.OK, "success", user);
+        } catch (HttpError e) {
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
+    @PutMapping("/update/{userId}")
+    public ResponseEntity<GeneralResponse> updateUserRole(@PathVariable UUID userId, @RequestBody @Valid UpdateRolesDto updateRolesDto) {
+        try {
+            userService.updateRoles(userId, updateRolesDto);
+            return GeneralResponse.getResponse(HttpStatus.OK, "success");
         } catch (HttpError e) {
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
         }
