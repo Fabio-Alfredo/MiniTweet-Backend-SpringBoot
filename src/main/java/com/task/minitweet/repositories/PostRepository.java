@@ -12,4 +12,5 @@ import java.util.UUID;
 public interface PostRepository extends JpaRepository<Post, UUID> {
     List<Post>findAllByAuthor(User author);
     Post findByIdAndAuthor(UUID id, User author);
+    List<Post>findByAuthorInOrderByCreatedAtDesc(List<User> authors);
 }

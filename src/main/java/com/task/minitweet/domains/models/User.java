@@ -51,7 +51,7 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Follow> followers;
 
-    //Los qu yo sigo
+    //Los que yo sigo
     @OneToMany(mappedBy = "followed", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Follow> following;

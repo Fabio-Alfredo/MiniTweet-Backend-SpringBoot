@@ -7,7 +7,9 @@ import com.task.minitweet.domains.models.User;
 import com.task.minitweet.exceptions.HttpError;
 import com.task.minitweet.repositories.PostRepository;
 import com.task.minitweet.services.contract.CloudinaryService;
+import com.task.minitweet.services.contract.FollowService;
 import com.task.minitweet.services.contract.PostService;
+import com.task.minitweet.services.contract.UserService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -22,11 +24,13 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
     private final CloudinaryService cloudinaryService;
+    private final FollowService followService;
 
-    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper, CloudinaryService cloudinaryService) {
+    public PostServiceImpl(PostRepository postRepository, ModelMapper modelMapper, CloudinaryService cloudinaryService, FollowService followService) {
         this.postRepository = postRepository;
         this.modelMapper = modelMapper;
         this.cloudinaryService = cloudinaryService;
+        this.followService = followService;
     }
 
     /**
@@ -168,6 +172,20 @@ public class PostServiceImpl implements PostService {
             if(posts.isEmpty()){
                 throw new HttpError(HttpStatus.NOT_FOUND, "No posts found for this user");
             }
+
+            return posts.stream()
+                    .map(post -> modelMapper.map(post, FindPostDto.class))
+                    .toList();
+        }catch (HttpError e){
+            throw e;
+        }
+    }
+
+    @Override
+    public List<FindPostDto> findAllPostsByFollowing(User user) {
+        try{
+            List<User>allFollowing = followService.findFollowingOf(user.getId(), user);
+            List<Post>posts = postRepository.findByAuthorInOrderByCreatedAtDesc(allFollowing);
 
             return posts.stream()
                     .map(post -> modelMapper.map(post, FindPostDto.class))

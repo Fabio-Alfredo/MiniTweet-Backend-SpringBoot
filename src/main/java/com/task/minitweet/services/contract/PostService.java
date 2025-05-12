@@ -15,5 +15,6 @@ public interface PostService {
     void updateLikesInPost(UUID id, User user);
     void deletePostByIdAndUser(UUID id, User user);
     List<FindPostDto>findAllPostsByUser(User user, Boolean isOwner);
+    List<FindPostDto>findAllPostsByFollowing(User user);
     FindPostDto updatePost(UUID id, CreatePostDto postDto, User user);
 }

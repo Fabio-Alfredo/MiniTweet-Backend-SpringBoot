@@ -55,9 +55,6 @@ public class FollowServiceImpl implements FollowService {
             }
 
             List<User> followers = followRepository.findFollowersOf(user);
-            if (followers.isEmpty()) {
-                throw new HttpError(HttpStatus.NOT_FOUND, "No followers found");
-            }
             return followers;
         } catch (HttpError e) {
             throw e;
@@ -74,9 +71,6 @@ public class FollowServiceImpl implements FollowService {
             }
 
             List<User> following = followRepository.findFollowingOf(user);
-            if (following.isEmpty()) {
-                throw new HttpError(HttpStatus.NOT_FOUND, "No following found");
-            }
             return following;
         } catch (HttpError e) {
             throw e;

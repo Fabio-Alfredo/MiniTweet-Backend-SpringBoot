@@ -103,6 +103,18 @@ public class PostController {
         }
     }
 
+    @GetMapping("/following/all")
+    public ResponseEntity<GeneralResponse>findAllPostsByFollowing(){
+        try{
+            User user = userService.findUserAuthenticated();
+
+            List<FindPostDto>posts = postService.findAllPostsByFollowing(user);
+            return GeneralResponse.getResponse(HttpStatus.OK, "success", posts);
+        }catch (HttpError e){
+            return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
+        }
+    }
+
 
     @PutMapping("/update/{postId}")
     public ResponseEntity<GeneralResponse>updatePost(@PathVariable UUID postId, @ModelAttribute @Valid CreatePostDto postDto){
@@ -115,6 +127,7 @@ public class PostController {
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());
         }
     }
+
 
 
 }
