@@ -202,6 +202,16 @@ public class PostServiceImpl implements PostService {
         }
     }
 
+    /**
+     * Este método actualiza un post.
+     * Si el post no se encuentra, se lanza una excepción HttpError con el código 404.
+     *
+     * @param id El ID del post a actualizar.
+     * @param postDto El DTO del post a actualizar.
+     * @param user El usuario que actualiza el post.
+     * @return El post actualizado.
+     * @throws HttpError Si no se encuentra el post o si no es el propietario del post.
+     */
     @Override
     @Transactional(rollbackOn = Exception.class)
     public FindPostDto updatePost(UUID id, CreatePostDto postDto, User user) {
