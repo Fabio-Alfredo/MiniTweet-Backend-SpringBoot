@@ -41,6 +41,12 @@ public class UserServiceImpl implements UserService {
         this.roleService = roleService;
     }
 
+    /**
+     * Este método registra un nuevo usuario.
+     *
+     * @param userDto El DTO del usuario a registrar.
+     * @throws HttpError Si el usuario ya existe.
+     */
     @Override
     @Transactional(rollbackOn = Exception.class)
     public void registerUser(RegisterUserDto userDto) {
@@ -59,6 +65,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Este método permite a un usuario iniciar sesión.
+     *
+     * @param identifier El nombre de usuario o correo electrónico del usuario.
+     * @param password   La contraseña del usuario.
+     * @return El token de acceso del usuario.
+     * @throws HttpError Si las credenciales son inválidas.
+     */
     @Override
     @Transactional(rollbackOn = Exception.class)
     public Token loginUser(String identifier, String password) {
@@ -74,6 +88,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Este método busca un usuario por su nombre de usuario o correo electrónico.
+     *
+     * @param identifier El nombre de usuario o correo electrónico del usuario.
+     * @return El usuario encontrado.
+     * @throws HttpError Si el usuario no existe.
+     */
     @Override
     public User findByIdentifier(String identifier) {
         try{
@@ -87,6 +108,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Este método busca un usuario por su correo electrónico.
+     *
+     * @param email El correo electrónico del usuario.
+     * @return El usuario encontrado.
+     * @throws HttpError Si el usuario no existe.
+     */
     @Override
     public User findByEmail(String email) {
         try{
@@ -100,6 +128,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Este método busca un usuario por su ID.
+     *
+     * @param id El ID del usuario.
+     * @return El usuario encontrado.
+     * @throws HttpError Si el usuario no existe.
+     */
     @Override
     public User findById(UUID id) {
         try {
@@ -113,6 +148,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Este método busca todos los usuarios.
+     *
+     * @return La lista de usuarios encontrados.
+     * @throws HttpError Si no se encuentran usuarios.
+     */
     @Override
     public List<User> findAll() {
         try{
@@ -126,6 +167,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Este método actualiza los roles de un usuario.
+     *
+     * @param user El ID del usuario a actualizar.
+     * @param updateRolesDto El DTO con los roles a agregar o eliminar.
+     * @throws HttpError Si el usuario no existe o si se intenta eliminar el último rol.
+     */
     @Override
     public void updateRoles(UUID user, UpdateRolesDto updateRolesDto) {
         try{
@@ -142,6 +190,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Este método registra un nuevo token para un usuario.
+     *
+     * @param user El usuario para el que se registra el token.
+     * @return El nuevo token registrado.
+     * @throws HttpError Si el token no es válido.
+     */
     @Override
     @Transactional(rollbackOn = Exception.class)
     public Token registerToken(User user) {
@@ -157,6 +212,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Este método verifica si un token es válido.
+     *
+     * @param user  El usuario al que pertenece el token.
+     * @param token El token a verificar.
+     * @return true si el token es válido, false en caso contrario.
+     * @throws HttpError Si el token no es válido.
+     */
     @Override
     @Transactional(rollbackOn = Exception.class)
     public Boolean isTokenValid(User user, String token) {
@@ -173,6 +236,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * Este método limpia los tokens inactivos de un usuario.
+     *
+     * @param user El usuario del que se limpian los tokens.
+     */
     @Override
     @Transactional(rollbackOn = Exception.class)
     public void cleanToken(User user) {
@@ -185,6 +253,12 @@ public class UserServiceImpl implements UserService {
         });
     }
 
+    /**
+     * Este método elimina un token de un usuario.
+     *
+     * @param user  El usuario del que se elimina el token.
+     * @param token El token a eliminar.
+     */
     @Override
     public User findUserAuthenticated() {
         try{

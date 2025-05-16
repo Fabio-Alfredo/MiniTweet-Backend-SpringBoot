@@ -23,6 +23,13 @@ public class RoleServiceImpl implements RoleService {
         this.modelMapper = modelMapper;
     }
 
+    /**
+     * Este método busca un rol por su ID.
+     *
+     * @param id El ID del rol a buscar.
+     * @return El rol encontrado.
+     * @throws HttpError Si el rol no existe.
+     */
     @Override
     public Role findRoleById(String id) {
         try{
@@ -37,6 +44,12 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * Este método busca todos los roles.
+     *
+     * @return La lista de roles encontrados.
+     * @throws HttpError Si no se encuentran roles.
+     */
     @Override
     public List<Role> findAllRoles() {
         try{
@@ -50,6 +63,12 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+    /**
+     * Este método crea un nuevo rol.
+     *
+     * @param roleDto El DTO del rol a crear.
+     * @throws HttpError Si el rol ya existe.
+     */
     @Override
     @Transactional(rollbackOn = Exception.class)
     public void createRole(CreateRoleDto roleDto) {

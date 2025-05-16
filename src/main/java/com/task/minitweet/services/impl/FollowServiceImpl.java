@@ -25,6 +25,13 @@ public class FollowServiceImpl implements FollowService {
         this.followRepository = followRepository;
     }
 
+    /**
+     * Este método permite a un usuario seguir a otro usuario.
+     *
+     * @param follower El usuario que sigue.
+     * @param followed El usuario que es seguido.
+     * @throws HttpError Si el usuario ya sigue al otro usuario.
+     */
     @Override
     @Transactional(rollbackOn = Exception.class)
     public void followUser(User follower, UUID followed) {
@@ -45,6 +52,13 @@ public class FollowServiceImpl implements FollowService {
         }
     }
 
+    /**
+     * Este método permite a un usuario dejar de seguir a otro usuario.
+     *
+     * @param follower El usuario que deja de seguir.
+     * @param followed El usuario que es dejado de seguir.
+     * @throws HttpError Si el usuario no sigue al otro usuario.
+     */
     @Override
     public List<User> findFollowersOf(UUID userId, User authenticatedUser) {
         try {
@@ -61,6 +75,13 @@ public class FollowServiceImpl implements FollowService {
         }
     }
 
+    /**
+     * Este método permite a un usuario dejar de seguir a otro usuario.
+     *
+     * @param follower El usuario que deja de seguir.
+     * @param followed El usuario que es dejado de seguir.
+     * @throws HttpError Si el usuario no sigue al otro usuario.
+     */
     @Override
     public List<User> findFollowingOf(UUID userId, User authenticatedUser) {
         try {
@@ -76,8 +97,5 @@ public class FollowServiceImpl implements FollowService {
             throw e;
         }
     }
-
-
-
 
 }

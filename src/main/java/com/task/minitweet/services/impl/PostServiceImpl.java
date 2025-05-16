@@ -181,6 +181,13 @@ public class PostServiceImpl implements PostService {
         }
     }
 
+    /**
+     * Este método busca todos los posts de los usuarios que sigue el usuario.
+     *
+     * @param user El usuario que está buscando los posts.
+     * @return Una lista de posts de los usuarios que sigue el usuario.
+     * @throws HttpError Si no se encuentran posts para el usuario.
+     */
     @Override
     public List<FindPostDto> findAllPostsByFollowing(User user) {
         try{

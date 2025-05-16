@@ -21,6 +21,12 @@ public class CloudinaryServiceImpl implements CloudinaryService {
         this.cloudinary = cloudinary;
     }
 
+    /**
+     * Este método sube una imagen a Cloudinary.
+     * @param file La imagen a subir.
+     * @param folder La carpeta donde se guardará la imagen.
+     * @return La URL de la imagen subida.
+     */
     @Override
     public String uploadImage(MultipartFile file, String folder) {
         try{
@@ -36,6 +42,11 @@ public class CloudinaryServiceImpl implements CloudinaryService {
         }
     }
 
+    /**
+     * Este método elimina una imagen de Cloudinary.
+     * @param publicId El ID público de la imagen a eliminar.
+     * @return El resultado de la eliminación.
+     */
     @Override
     public String deleteImage(String publicId) {
         try {

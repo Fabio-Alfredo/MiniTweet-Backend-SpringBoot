@@ -31,6 +31,13 @@ public class CommentServiceImpl implements CommentService {
         this.modelMapper = modelMapper;
     }
 
+    /**
+     * Este método crea un nuevo comentario.
+     *
+     * @param commentDto El DTO del comentario a crear.
+     * @return El comentario creado.
+     * @throws HttpError
+     */
     @Override
     @Transactional(rollbackOn = Exception.class)
     public void createComment(CreateCommentDto commentDto, User author) {
@@ -48,6 +55,13 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    /**
+     * Este método busca todos los comentarios de un post.
+     *
+     * @param postId El ID del post.
+     * @return La lista de comentarios del post.
+     * @throws HttpError
+     */
     @Override
     public List<Comment> findAllByPostId(UUID postId) {
         try {
@@ -60,6 +74,13 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    /**
+     * Este método busca un comentario por su ID.
+     *
+     * @param commentId El ID del comentario.
+     * @return El comentario encontrado.
+     * @throws HttpError
+     */
     @Override
     public void updateComment(UpdateCommentDto commentDto, User author) {
         try{
