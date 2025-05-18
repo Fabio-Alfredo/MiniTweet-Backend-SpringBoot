@@ -254,10 +254,9 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Este método elimina un token de un usuario.
+     * Este método obtiene el usuario autenticado.
      *
-     * @param user  El usuario del que se elimina el token.
-     * @param token El token a eliminar.
+     * @return El usuario autenticado.
      */
     @Override
     public User findUserAuthenticated() {

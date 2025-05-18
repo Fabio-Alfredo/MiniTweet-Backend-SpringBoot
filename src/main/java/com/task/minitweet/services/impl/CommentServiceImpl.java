@@ -75,11 +75,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     /**
-     * Este método busca un comentario por su ID.
+     * Este metodo permite editar un comentario.
+     * Si el comentario no existe, se lanza una excepción HttpError con el código 404.
      *
-     * @param commentId El ID del comentario.
-     * @return El comentario encontrado.
-     * @throws HttpError
+     * @param commentDto El DTO del comentario a editar.
+     * @param author El autor del comentario.
      */
     @Override
     public void updateComment(UpdateCommentDto commentDto, User author) {

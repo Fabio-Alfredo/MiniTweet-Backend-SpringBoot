@@ -10,11 +10,13 @@ import com.task.minitweet.services.contract.PostService;
 import com.task.minitweet.services.contract.UserService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -104,11 +106,12 @@ public class PostController {
     }
 
     @GetMapping("/following/all")
-    public ResponseEntity<GeneralResponse>findAllPostsByFollowing(){
+    public ResponseEntity<GeneralResponse>findAllPostsByFollowing(@RequestParam(required=false) @DateTimeFormat (iso = DateTimeFormat.ISO.DATE_TIME) Date createAt,
+                                                                  @RequestParam(defaultValue= "0") int size){
         try{
             User user = userService.findUserAuthenticated();
 
-            List<FindPostDto>posts = postService.findAllPostsByFollowing(user);
+            List<FindPostDto>posts = postService.findAllPostsByFollowing(user, createAt, size);
             return GeneralResponse.getResponse(HttpStatus.OK, "success", posts);
         }catch (HttpError e){
             return GeneralResponse.getResponse(e.getHttpStatus(), e.getMessage());

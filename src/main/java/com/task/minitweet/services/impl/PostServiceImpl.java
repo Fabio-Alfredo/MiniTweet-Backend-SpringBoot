@@ -12,9 +12,13 @@ import com.task.minitweet.services.contract.PostService;
 import com.task.minitweet.services.contract.UserService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -189,10 +193,13 @@ public class PostServiceImpl implements PostService {
      * @throws HttpError Si no se encuentran posts para el usuario.
      */
     @Override
-    public List<FindPostDto> findAllPostsByFollowing(User user) {
+    public List<FindPostDto> findAllPostsByFollowing(User user, Date createAt, int size) {
         try{
             List<User>allFollowing = followService.findFollowingOf(user.getId(), user);
-            List<Post>posts = postRepository.findByAuthorInOrderByCreatedAtDesc(allFollowing);
+            Pageable pageable = PageRequest.of(0, size);
+            List<Post>posts = (createAt == null)
+                    ? postRepository.findByAuthorInOrderByCreatedAtDesc(allFollowing, pageable)
+                    : postRepository.findByAuthorInAndCreatedAtBeforeOrderByCreatedAtDesc(allFollowing, createAt, pageable);
 
             return posts.stream()
                     .map(post -> modelMapper.map(post, FindPostDto.class))

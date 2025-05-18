@@ -53,11 +53,12 @@ public class FollowServiceImpl implements FollowService {
     }
 
     /**
-     * Este método permite a un usuario dejar de seguir a otro usuario.
+     * Este método permite traer la lista de seguidores de un usuario.
      *
-     * @param follower El usuario que deja de seguir.
-     * @param followed El usuario que es dejado de seguir.
-     * @throws HttpError Si el usuario no sigue al otro usuario.
+     * @param userId El id del usuario.
+     * @param authenticatedUser El usuario autenticado.
+     * @return La lista de seguidores del usuario.
+     * @throws HttpError Si el usuario no es el propietario de la cuenta o no sigue al usuario.
      */
     @Override
     public List<User> findFollowersOf(UUID userId, User authenticatedUser) {
@@ -76,11 +77,12 @@ public class FollowServiceImpl implements FollowService {
     }
 
     /**
-     * Este método permite a un usuario dejar de seguir a otro usuario.
+     * Este método permite traer la lista de usuarios que sigue un usuario.
      *
-     * @param follower El usuario que deja de seguir.
-     * @param followed El usuario que es dejado de seguir.
-     * @throws HttpError Si el usuario no sigue al otro usuario.
+     * @param userId El id del usuario.
+     * @param authenticatedUser El usuario autenticado.
+     * @return La lista de usuarios que sigue el usuario.
+     * @throws HttpError Si el usuario no es el propietario de la cuenta o no sigue al usuario.
      */
     @Override
     public List<User> findFollowingOf(UUID userId, User authenticatedUser) {
