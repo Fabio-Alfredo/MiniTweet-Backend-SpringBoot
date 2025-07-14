@@ -1,0 +1,41 @@
+site_name: "Documentación API - SafeHouse"
+site_description: "Documentación clara y accesible para el backend en Spring Boot."
+site_author: "Fabio Hernandez"
+site_url: "https://tusitio.com/docs"
+
+theme:
+  name: material
+  palette:
+    primary: teal
+    accent: amber
+  font:
+    text: Roboto
+    code: Fira Code
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - content.code.copy
+    - content.tabs.link
+    - search.suggest
+    - search.highlight
+    - toc.integrate
+    - header.autohide
+
+nav:
+  - 🏠 Inicio: index.md
+  - 🚀 Introducción: introduction.md
+  - 📦 Empezar: getting-started.md
+  - 🏗️ Arquitectura: architecture.md
+  - ⚙️ Entorno: environment.md
+  - 🔐 Autenticación: authentication.md
+  - 🚨 Errores: error-handling.md
+  - 📡 Endpoints:
+      - 👤 Usuarios: endpoints/users.md
+      - 📦 Productos: endpoints/products.md
+      - 🛒 Pedidos: endpoints/orders.md
+      - 💳 Pagos: endpoints/payments.md
+  - 🧬 Base de datos: database.md
+  - 🛡️ Seguridad: security.md
+  - 📄 Cambios: changelog.md
+  - ❓ FAQ: faq.md
