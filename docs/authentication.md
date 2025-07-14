@@ -216,4 +216,4 @@ MiniTweet usa control por roles para limitar el acceso:
 
 
 ### ¿Te gustaría ver cómo manejar errores de autenticación o cómo construir filtros personalizados?
-➡️ Revisa la sección de [Manejo de Errores](#manejo-de-errores)
+➡️ Revisa la sección de [Manejo de Errores](error-handling.md)
