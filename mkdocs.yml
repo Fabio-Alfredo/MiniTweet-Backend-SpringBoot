@@ -27,7 +27,6 @@ nav:
   - 🚀 Introducción: introduction.md
   - 📦 Empezar: getting-started.md
   - 🏗️ Arquitectura: architecture.md
-  - ⚙️ Entorno: environment.md
   - 🔐 Autenticación: authentication.md
   - 🚨 Errores: error-handling.md
   - 📡 Endpoints:
