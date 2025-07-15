@@ -1,0 +1,1542 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación clara y accesible para el backend en Spring Boot.">
+      
+      
+        <meta name="author" content="Fabio Hernandez">
+      
+      
+        <link rel="canonical" href="https://tusitio.com/docs/endpoints/posts/">
+      
+      
+        <link rel="prev" href="../introduction/">
+      
+      
+        <link rel="next" href="../comments/">
+      
+      
+      <link rel="icon" href="../../assets/images/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>✏️ Publicaciones - Documentación API - MiniTweet API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#endpoints-de-publicaciones-posts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Documentación API - MiniTweet API" class="md-header__button md-logo" aria-label="Documentación API - MiniTweet API" data-md-component="logo">
+      
+  <img src="../../assets/icons/social-red.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentación API - MiniTweet API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ✏️ Publicaciones
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentación API - MiniTweet API" class="md-nav__button md-logo" aria-label="Documentación API - MiniTweet API" data-md-component="logo">
+      
+  <img src="../../assets/icons/social-red.svg" alt="logo">
+
+    </a>
+    Documentación API - MiniTweet API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🏠 Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚀 Introducción
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📦 Empezar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🏗️ Arquitectura
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🔐 Autenticación
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚨 Errores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    📡 Endpoints
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            📡 Endpoints
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📝 Introducción
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    ✏️ Publicaciones
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    ✏️ Publicaciones
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#crear-una-publicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      ➕ Crear una publicación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="➕ Crear una publicación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#body-form-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      📤 Body (form-data)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ver-todas-las-publicaciones-de-un-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      👀 Ver todas las publicaciones de un usuario
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="👀 Ver todas las publicaciones de un usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-ruta" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Parámetros de ruta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ver-todos-los-posts-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Ver todos los posts (admin)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Ver todos los posts (admin)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buscar-publicacion-por-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔎 Buscar publicación por ID
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔎 Buscar publicación por ID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-ruta_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Parámetros de ruta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminar-una-publicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Eliminar una publicación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ Eliminar una publicación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-ruta_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Parámetros de ruta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dar-like-a-una-publicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❤️ Dar like a una publicación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❤️ Dar like a una publicación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-ruta_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Parámetros de ruta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ver-posts-de-personas-que-sigues" class="md-nav__link">
+    <span class="md-ellipsis">
+      👥 Ver posts de personas que sigues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="👥 Ver posts de personas que sigues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-ruta_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Parámetros de ruta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editar-una-publicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✏️ Editar una publicación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✏️ Editar una publicación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#body-form-data_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      📤 Body (form-data)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-ruta_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Parámetros de ruta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-importantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧠 Notas importantes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧠 Notas importantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quieres-ver-como-gestionar-comentarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Quieres ver cómo gestionar comentarios?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../comments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    💬 Comentarios
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../followers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    👥 Followers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    👤 Usuarios
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🧬 Base de datos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ❓ FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="endpoints-de-publicaciones-posts">📝 Endpoints de Publicaciones (Posts)</h1>
+<p>La API de MiniTweet permite a los usuarios crear, ver, editar, eliminar y dar like a publicaciones conocidas como "posts". A continuación, te presentamos todos los endpoints disponibles relacionados con este recurso.</p>
+<hr />
+<h2 id="crear-una-publicacion">➕ Crear una publicación</h2>
+<p><strong><code>POST /api/posts/create</code></strong></p>
+<p>Crea una nueva publicación disponible para todos los usuarios, dicha publicación puede contener texto y una imagen opcional.</p>
+<h3 id="requiere-autenticacion">🔐 Requiere autenticación</h3>
+<p><strong>Sí</strong> Se require un token JWT válido.</p>
+<h3 id="body-form-data">📤 Body (form-data)</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Requerido</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>string</td>
+<td>Opcional</td>
+<td>Mensaje o pensamiento a compartir</td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>archivo</td>
+<td>Opcional</td>
+<td>Imagen relacionada al post</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejemplo-de-respuesta">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">HTTP/1.1 201 Created
+
+{
+    &quot;message&quot;: &quot;Post created successfully&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;1fe4cca5-2f75-42eb-8731-873ae5338c2e&quot;,
+        &quot;content&quot;: &quot;2&quot;,
+        &quot;image&quot;: &quot;https://res.cloudinary.com/dosctrwix/image/upload/v1/posts/koedzuqwdfv30cusmch4&quot;,
+        &quot;createdAt&quot;: &quot;2025-07-15T00:24:54.124+00:00&quot;,
+        &quot;likedBy&quot;: null,
+        &quot;author&quot;: {
+            &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+            &quot;username&quot;: &quot;hernandex2&quot;,
+            &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+            &quot;biography&quot;: null,
+            &quot;profilePicture&quot;: null
+        }
+    }
+}
+</code></pre>
+<h3 id="notas">⚠️ Notas</h3>
+<ul>
+<li>El campo <code>text</code> es opcional, pero si se deja vacío, el post no será creado.</li>
+<li>La imagen debe ser un archivo válido y no exceder el tamaño máximo permitido por la API.</li>
+<li>El campo <code>likedBy</code> se inicializa como <code>[]</code> y se actualizará cuando los usuarios den like a la publicación.</li>
+</ul>
+<hr />
+<h2 id="ver-todas-las-publicaciones-de-un-usuario">👀 Ver todas las publicaciones de un usuario</h2>
+<p><strong><code>GET /api/posts/{userId}/all</code></strong></p>
+<p>Devuelve todos los posts públicos del usuario o todos si es el mismo usuario autenticado.</p>
+<h3 id="requiere-autenticacion_1">🔐 Requiere autenticación</h3>
+<p><strong>Sí</strong> Se requiere un token JWT válido.</p>
+<h3 id="parametros-de-ruta">📄 Parámetros de ruta</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>userId</code></td>
+<td>UUID</td>
+<td>ID del usuario cuyas publicaciones se desean obtener</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejemplo-de-respuesta_1">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">HTTP/1.1 200 OK
+{
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;1fe4cca5-2f75-42eb-8731-873ae5338c2e&quot;,
+            &quot;content&quot;: &quot;2&quot;,
+            &quot;image&quot;: &quot;https://res.cloudinary.com/dosctrwix/image/upload/v1/posts/koedzuqwdfv30cusmch4&quot;,
+            &quot;createdAt&quot;: &quot;2025-07-15T00:24:54.124+00:00&quot;,
+            &quot;likedBy&quot;: [],
+            &quot;author&quot;: {
+                &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+                &quot;username&quot;: &quot;hernandex2&quot;,
+                &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+                &quot;biography&quot;: null,
+                &quot;profilePicture&quot;: null
+            }
+        },
+        {
+            &quot;id&quot;: &quot;03bde210-dc3b-400b-ac54-dfb7f17a4269&quot;,
+            &quot;content&quot;: &quot;2&quot;,
+            &quot;image&quot;: null,
+            &quot;createdAt&quot;: &quot;2025-07-15T00:25:43.018+00:00&quot;,
+            &quot;likedBy&quot;: [],
+            &quot;author&quot;: {
+                &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+                &quot;username&quot;: &quot;hernandex2&quot;,
+                &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+                &quot;biography&quot;: null,
+                &quot;profilePicture&quot;: null
+            }
+        }
+    ]
+}
+</code></pre>
+<h3 id="notas_1">⚠️ Notas</h3>
+<ul>
+<li>Si el usuario no tiene publicaciones, se devolverá un array vacío.</li>
+<li>Si el usuario autenticado es el mismo que el <code>userId</code>, se devolverán todas sus publicaciones, independientemente de su visibilidad.</li>
+</ul>
+<hr />
+<h2 id="ver-todos-los-posts-admin">📚 Ver todos los posts (admin)</h2>
+<p><strong><code>GET /api/posts/all</code></strong></p>
+<p>Muestra todas las publicaciones registradas dentro del sistema (solo para administradores).</p>
+<h3 id="requiere-autenticacion_2">🔐 Requiere autenticación</h3>
+<p><strong>Sí</strong> Se requiere un token JWT válido con rol de administrador.</p>
+<h3 id="ejemplo-de-respuesta_2">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">HTTP/1.1 200 OK
+{
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;1fe4cca5-2f75-42eb-8731-873ae5338c2e&quot;,
+            &quot;content&quot;: &quot;2&quot;,
+            &quot;image&quot;: &quot;https://res.cloudinary.com/dosctrwix/image/upload/v1/posts/koedzuqwdfv30cusmch4&quot;,
+            &quot;createdAt&quot;: &quot;2025-07-15T00:24:54.124+00:00&quot;,
+            &quot;author&quot;: {
+                &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+                &quot;username&quot;: &quot;hernandex2&quot;,
+                &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+                &quot;authorities&quot;: [
+                    {
+                        &quot;authority&quot;: &quot;USER&quot;
+                    }
+                ],
+                &quot;accountNonExpired&quot;: false,
+                &quot;accountNonLocked&quot;: false,
+                &quot;credentialsNonExpired&quot;: false,
+                &quot;enabled&quot;: true
+            },
+            &quot;likedBy&quot;: []
+        },
+        {
+            &quot;id&quot;: &quot;03bde210-dc3b-400b-ac54-dfb7f17a4269&quot;,
+            &quot;content&quot;: &quot;2&quot;,
+            &quot;image&quot;: null,
+            &quot;createdAt&quot;: &quot;2025-07-15T00:25:43.018+00:00&quot;,
+            &quot;author&quot;: {
+                &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+                &quot;username&quot;: &quot;hernandex2&quot;,
+                &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+                &quot;authorities&quot;: [
+                    {
+                        &quot;authority&quot;: &quot;USER&quot;
+                    }
+                ],
+                &quot;accountNonExpired&quot;: false,
+                &quot;accountNonLocked&quot;: false,
+                &quot;credentialsNonExpired&quot;: false,
+                &quot;enabled&quot;: true
+            },
+            &quot;likedBy&quot;: []
+        }
+    ]
+}
+</code></pre>
+<h3 id="notas_2">⚠️ Notas</h3>
+<ul>
+<li>Este endpoint es exclusivo para administradores y requiere un token JWT con los permisos adecuados.</li>
+<li>La respuesta incluye todos los posts, independientemente de su autor o contenido.</li>
+</ul>
+<hr />
+<h2 id="buscar-publicacion-por-id">🔎 Buscar publicación por ID</h2>
+<p><strong><code>GET /api/posts/by-id/{postId}</code></strong>
+Permite obtener una publicacion especifica a partir de su ID.</p>
+<h3 id="requiere-autenticacion_3">🔐 Requiere autenticación</h3>
+<p><strong>Sí</strong> Se requiere un token JWT válido.</p>
+<h3 id="parametros-de-ruta_1">📄 Parámetros de ruta</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>postId</code></td>
+<td>UUID</td>
+<td>ID de la publicación que se desea obtener</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejemplo-de-respuesta_3">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">HTTP/1.1 200 OK
+{
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;03bde210-dc3b-400b-ac54-dfb7f17a4269&quot;,
+        &quot;content&quot;: &quot;2&quot;,
+        &quot;image&quot;: null,
+        &quot;createdAt&quot;: &quot;2025-07-15T00:25:43.018+00:00&quot;,
+        &quot;likedBy&quot;: [],
+        &quot;author&quot;: {
+            &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+            &quot;username&quot;: &quot;hernandex2&quot;,
+            &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+            &quot;biography&quot;: null,
+            &quot;profilePicture&quot;: null
+        }
+    }
+}
+</code></pre>
+<h3 id="notas_3">⚠️ Notas</h3>
+<ul>
+<li>Si el post no existe, se devolverá un error 404.</li>
+<li>El usuario debe tener permisos para ver la publicación, de lo contrario se devolverá un error 403.</li>
+</ul>
+<hr />
+<h2 id="eliminar-una-publicacion">❌ Eliminar una publicación</h2>
+<p><strong><code>DELETE /api/posts/delete/{postId}</code></strong>
+Este endpoint permite a un usuario eliminar una publicación específica creada por él.</p>
+<h3 id="requiere-autenticacion_4">🔐 Requiere autenticación</h3>
+<p><strong>Sí</strong> Se requiere un token JWT válido.</p>
+<h3 id="parametros-de-ruta_2">📄 Parámetros de ruta</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>postId</code></td>
+<td>UUID</td>
+<td>ID de la publicación que se desea eliminar</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejemplo-de-respuesta_4">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">HTTP/1.1 200 OK
+{
+    &quot;message&quot;: &quot;Post deleted successfully&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+<h3 id="notas_4">⚠️ Notas</h3>
+<ul>
+<li>Si el post no existe, se devolverá un error 404.</li>
+<li>El usuario debe ser el autor de la publicación para poder eliminarla, de lo contrario se devolverá un error 403.</li>
+</ul>
+<hr />
+<h2 id="dar-like-a-una-publicacion">❤️ Dar like a una publicación</h2>
+<p><strong><code>POST /api/posts/like/{postId}</code></strong>
+Permite a un usuario dar like a una publicación específica y si ya le dio like, se lo quita.</p>
+<h3 id="requiere-autenticacion_5">🔐 Requiere autenticación</h3>
+<p><strong>Sí</strong> Se requiere un token JWT válido.</p>
+<h3 id="parametros-de-ruta_3">📄 Parámetros de ruta</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>postId</code></td>
+<td>UUID</td>
+<td>ID de la publicación a la que se desea dar like</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejemplo-de-respuesta_5">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">HTTP/1.1 200 OK
+{
+    &quot;message&quot;: &quot;Post liked successfully&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+<h3 id="notas_5">⚠️ Notas</h3>
+<ul>
+<li>Si el post no existe, se devolverá un error 404.</li>
+<li>El usuario debe estar autenticado para poder dar like a una publicación, de lo contrario se devolverá un error 403.</li>
+<li>Si el usuario ya había dado like a la publicación, este se eliminará de la lista de likes.</li>
+<li>La lista de usuarios que han dado like a la publicación se actualizará automáticamente.</li>
+</ul>
+<hr />
+<h2 id="ver-posts-de-personas-que-sigues">👥 Ver posts de personas que sigues</h2>
+<p><strong><code>GET /api/posts/following/all</code></strong>
+Devuelve las publicaciones de los usuarios que el usuario autenticado sigue.</p>
+<h3 id="requiere-autenticacion_6">🔐 Requiere autenticación</h3>
+<p><strong>Sí</strong> Se requiere un token JWT válido.</p>
+<h3 id="parametros-de-ruta_4">📄 Parámetros de ruta</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>createAt</code></td>
+<td>Date</td>
+<td>Fecha para paginación (ISO 8601)</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>int</td>
+<td>Cantidad de posts a devolver</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejemplo-de-respuesta_6">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">HTTP/1.1 200 OK
+{
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;1fe4cca5-2f75-42eb-8731-873ae5338c2e&quot;,
+            &quot;content&quot;: &quot;2&quot;,
+            &quot;image&quot;: &quot;https://res.cloudinary.com/dosctrwix/image/upload/v1/posts/koedzuqwdfv30cusmch4&quot;,
+            &quot;createdAt&quot;: &quot;2025-07-15T00:24:54.124+00:00&quot;,
+            &quot;likedBy&quot;: [],
+            &quot;author&quot;: {
+                &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+                &quot;username&quot;: &quot;hernandex2&quot;,
+                &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+                &quot;biography&quot;: null,
+                &quot;profilePicture&quot;: null
+            }
+        }
+    ]
+}
+</code></pre>
+<h3 id="notas_6">⚠️ Notas</h3>
+<ul>
+<li>Si el usuario no sigue a nadie, se devolverá un array vacío.</li>
+<li>Si no hay publicaciones recientes, se devolverá un array vacío.</li>
+<li>Este endpoint es útil para ver las publicaciones más recientes de las personas que sigues.</li>
+</ul>
+<hr />
+<h2 id="editar-una-publicacion">✏️ Editar una publicación</h2>
+<p><strong><code>PUT /api/posts/update/{postId}</code></strong></p>
+<p>Permite al usuario actualizar el texto o imagen de una publicación existente.</p>
+<h3 id="requiere-autenticacion_7">🔐 Requiere autenticación</h3>
+<p><strong>Sí</strong> Se requiere un token JWT válido.</p>
+<h3 id="body-form-data_1">📤 Body (form-data)</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Requerido</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>string</td>
+<td>Opcional</td>
+<td>Nuevo contenido del post</td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>archivo</td>
+<td>Opcional</td>
+<td>Nueva imagen (si se desea cambiar)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="parametros-de-ruta_5">📄 Parámetros de ruta</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>postId</code></td>
+<td>UUID</td>
+<td>ID de la publicación que se desea editar</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejemplo-de-respuesta_7">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">HTTP/1.1 200 OK
+{
+    &quot;message&quot;: &quot;Post updated successfully&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;2f82ece7-ad34-4814-a7e7-e60578f37804&quot;,
+        &quot;content&quot;: &quot;3&quot;,
+        &quot;image&quot;: null,
+        &quot;createdAt&quot;: &quot;2025-07-15T00:47:16.364+00:00&quot;,
+        &quot;likedBy&quot;: [],
+        &quot;author&quot;: {
+            &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+            &quot;username&quot;: &quot;hernandex2&quot;,
+            &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+            &quot;biography&quot;: null,
+            &quot;profilePicture&quot;: null
+        }
+    }
+}
+</code></pre>
+<h3 id="notas_7">⚠️ Notas</h3>
+<ul>
+<li>Si el post no existe, se devolverá un error 404.</li>
+<li>El usuario debe ser el autor de la publicación para poder editarla, de lo contrario se devolverá un error 403.</li>
+<li>Si no se proporciona un nuevo texto o imagen, la publicación no se actualizará y se devolverá la publicación original sin cambios.  </li>
+<li>La imagen debe ser un archivo válido y no exceder el tamaño máximo permitido por la API.</li>
+<li>Si se proporciona un nuevo texto, este reemplazará al texto original de la publicación.</li>
+</ul>
+<hr />
+<h2 id="notas-importantes">🧠 Notas importantes</h2>
+<ul>
+<li>Las publicaciones pueden contener texto, imagen o ambos.</li>
+<li>Las publicaciones solo pueden ser modificadas o eliminadas por sus creadores.</li>
+<li>El endpoint /following/all permite paginación con fecha para obtener posts recientes de seguidores.</li>
+</ul>
+<h3 id="quieres-ver-como-gestionar-comentarios">¿Quieres ver cómo gestionar comentarios?</h3>
+<p>➡️ Próximo paso: <a href="../comments/">Gestionar comentarios</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "content.code.copy", "content.tabs.link", "search.suggest", "search.highlight", "toc.integrate", "header.autohide"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>

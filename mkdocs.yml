@@ -1,7 +1,7 @@
-site_name: "Documentación API - SafeHouse"
+site_name: "Documentación API - MiniTweet API"
 site_description: "Documentación clara y accesible para el backend en Spring Boot."
 site_author: "Fabio Hernandez"
-site_url: "https://tusitio.com/docs"
+site_url: "https://Fabio-Alfredo.github.io/MiniTweet-Backend-SpringBoot/"
 
 theme:
   name: material
@@ -21,6 +21,8 @@ theme:
     - search.highlight
     - toc.integrate
     - header.autohide
+  logo: "assets/icons/social-red.svg"
+  favicon: "assets/images/logo.png"
 
 nav:
   - 🏠 Inicio: index.md
@@ -34,6 +36,6 @@ nav:
       - ✏️ Publicaciones: endpoints/posts.md
       - 💬 Comentarios: endpoints/comments.md
       - 👥 Followers: endpoints/followers.md
-      - 👤 Usuarios: endpoints/users.md 
+      - 👤 Usuarios: endpoints/users.md
   - 🧬 Base de datos: database.md
   - ❓ FAQ: faq.md
