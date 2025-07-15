@@ -1,0 +1,999 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación clara y accesible para el backend en Spring Boot.">
+      
+      
+        <meta name="author" content="Fabio Hernandez">
+      
+      
+        <link rel="canonical" href="https://tusitio.com/docs/authentication/">
+      
+      
+        <link rel="prev" href="../architecture/">
+      
+      
+        <link rel="next" href="../error-handling/">
+      
+      
+      <link rel="icon" href="../assets/images/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>🔐 Autenticación - Documentación API - MiniTweet API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#autenticacion-en-minitweet-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Documentación API - MiniTweet API" class="md-header__button md-logo" aria-label="Documentación API - MiniTweet API" data-md-component="logo">
+      
+  <img src="../assets/icons/social-red.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentación API - MiniTweet API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🔐 Autenticación
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Documentación API - MiniTweet API" class="md-nav__button md-logo" aria-label="Documentación API - MiniTweet API" data-md-component="logo">
+      
+  <img src="../assets/icons/social-red.svg" alt="logo">
+
+    </a>
+    Documentación API - MiniTweet API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🏠 Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚀 Introducción
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📦 Empezar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🏗️ Arquitectura
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    🔐 Autenticación
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    🔐 Autenticación
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧠 ¿Cómo funciona?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-protege-spring-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛡️ ¿Qué protege Spring Security?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencias-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗂️ Dependencias clave
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flujo-de-autenticacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      📜 Flujo de autenticación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registro-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✍️ Registro de usuarios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✍️ Registro de usuarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respuesta-exitosa" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Respuesta exitosa
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respuestas-posibles-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Respuestas posibles errores
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inicio-de-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔑 Inicio de sesión
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔑 Inicio de sesión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respuesta-exitosa_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Respuesta exitosa
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respuestas-posibles-errores_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Respuestas posibles errores
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acceder-a-rutas-protegidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Acceder a rutas protegidas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#duracion-del-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      📆 Duración del token
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-y-permisos" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Roles y permisos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-importantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 Notas importantes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📌 Notas importantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#te-gustaria-ver-como-manejar-errores-de-autenticacion-o-como-construir-filtros-personalizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Te gustaría ver cómo manejar errores de autenticación o cómo construir filtros personalizados?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚨 Errores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    📡 Endpoints
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            📡 Endpoints
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📝 Introducción
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/posts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ✏️ Publicaciones
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/comments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    💬 Comentarios
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/followers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    👥 Followers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../endpoints/users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    👤 Usuarios
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🧬 Base de datos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ❓ FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="autenticacion-en-minitweet-api">🔐 Autenticación en MiniTweet API</h1>
+<p>MiniTweet utiliza <strong>Spring Security</strong> junto con <strong>JWT (JSON Web Tokens)</strong> para autenticar a los usuarios y proteger los recursos de la API.</p>
+<p>Así como hace uso de los roles y permisos para controlar el acceso a diferentes funcionalidades de la aplicación.</p>
+<p>Esta configuración permite que solo los usuarios autenticados y con los permisos adecuados puedan acceder a ciertas rutas, realizar publicaciones o modificar datos.</p>
+<hr />
+<h2 id="como-funciona">🧠 ¿Cómo funciona?</h2>
+<ol>
+<li>🔒 Un usuario se <strong>registra</strong> o inicia sesión con su email y contraseña.</li>
+<li>🧾 Si las credenciales son válidas, la API genera un <strong>JWT</strong>.</li>
+<li>📦 Este token se envía al cliente y debe guardarse localmente.</li>
+<li>🔐 Para acceder a rutas protegidas, el cliente debe enviar el token en el encabezado <code>Authorization</code>.</li>
+<li>🔍 La API valida el token y verifica los roles del usuario.</li>
+<li>✅ Si el token es válido y el usuario tiene los permisos necesarios, se permite el acceso a la ruta solicitada.</li>
+</ol>
+<hr />
+<h2 id="que-protege-spring-security">🛡️ ¿Qué protege Spring Security?</h2>
+<ul>
+<li>
+<p>Todas las rutas sensibles, como:<br />
+<code>/posts</code>, <code>/users</code>, <code>/comments</code>, etc.</p>
+</li>
+<li>
+<p>Verifica automáticamente si el token JWT:</p>
+</li>
+<li>Es válido</li>
+<li>No ha expirado</li>
+<li>Corresponde a un usuario real</li>
+<li>Comprueba los roles y permisos del usuario para cada solicitud.</li>
+<li>Permite el acceso solo a usuarios autenticados y autorizados.</li>
+</ul>
+<hr />
+<h2 id="dependencias-clave">🗂️ Dependencias clave</h2>
+<p>Tu proyecto utiliza las siguientes dependencias para manejar la seguridad:</p>
+<pre><code class="language-groovy">implementation 'org.springframework.boot:spring-boot-starter-security'
+implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+implementation 'io.jsonwebtoken:jjwt-impl:0.12.5'
+implementation 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+</code></pre>
+<hr />
+<h2 id="flujo-de-autenticacion">📜 Flujo de autenticación</h2>
+<ol>
+<li><strong>Registro de usuario</strong>: El usuario envía sus datos (email, contraseña) a la API.</li>
+<li><strong>Generación de token</strong>: Si el registro es exitoso, se genera un JWT que contiene la información del usuario y sus roles.</li>
+<li><strong>Almacenamiento del token</strong>: El cliente almacena el token en el almacenamiento local (localStorage, sessionStorage, etc.).</li>
+<li><strong>Acceso a rutas protegidas</strong>: El cliente envía el token en el encabezado <code>Authorization</code> en cada solicitud a rutas protegidas.</li>
+<li><strong>Validación del token</strong>: La API verifica el token y extrae la información del usuario.</li>
+<li><strong>Autorización</strong>: La API comprueba los roles del usuario para determinar si tiene permiso para acceder a la ruta solicitada.</li>
+<li><strong>Respuesta</strong>: Si el token es válido y el usuario tiene los permisos necesarios, la API procesa la solicitud y devuelve la respuesta correspondiente.</li>
+</ol>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant Cliente
+    participant API
+    Cliente-&gt;&gt;API: POST /auth/login (email, contraseña)
+    API--&gt;&gt;Cliente: JWT Token
+    Cliente-&gt;&gt;API: GET /posts (con token en header)
+    API--&gt;&gt;Cliente: Lista de posts (si el token es válido)
+    Cliente-&gt;&gt;API: POST /posts (con token en header)
+    API--&gt;&gt;Cliente: Post creado (si el token es válido y tiene permisos)
+</code></pre>
+<hr />
+<h2 id="registro-de-usuarios">✍️ Registro de usuarios</h2>
+<p><strong>metodo</strong>: <code>POST</code>
+<strong>ruta</strong>: <code>/auth/register</code>
+Los usuarios pueden registrarse enviando una solicitud POST a <code>/auth/register</code> con los siguientes datos:</p>
+<pre><code class="language-json">{
+    &quot;username&quot;: &quot;username&quot;,
+    &quot;email&quot;: &quot;email@example.com&quot;,
+    &quot;password&quot;: &quot;password&quot;
+}
+</code></pre>
+<h3 id="respuesta-exitosa">✅ Respuesta exitosa</h3>
+<pre><code class="language-json">HTTP/1.1 201 Created
+{
+    &quot;message&quot;: &quot;User registered successfully&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+<h3 id="respuestas-posibles-errores">❌ Respuestas posibles errores</h3>
+<pre><code class="language-json">HTTP/1.1 400 Bad Request
+{
+    &quot;message&quot;: &quot;Invalid input&quot;,
+    &quot;data&quot;: {
+        &quot;username&quot;: &quot;Username is required&quot;,
+        &quot;email&quot;: &quot;Email is required&quot;,
+        &quot;password&quot;: &quot;Password is required&quot;
+    }
+}
+</code></pre>
+<pre><code class="language-json">HTTP/1.1 409 Conflict
+{
+    &quot;message&quot;: &quot;User already exists, username or email is already taken&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+<pre><code class="language-json">HTTP/1.1 500 Internal Server Error
+{
+    &quot;message&quot;: &quot;An unexpected error occurred&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+<hr />
+<h2 id="inicio-de-sesion">🔑 Inicio de sesión</h2>
+<p><strong>metodo</strong>: <code>POST</code>
+<strong>ruta</strong>: <code>/auth/login</code>
+Los usuarios pueden iniciar sesión enviando una solicitud POST a <code>/auth/login</code> con los siguientes datos:</p>
+<pre><code class="language-json">{
+    &quot;identifier&quot;:&quot;hernandex2&quot;,
+    &quot;password&quot;:&quot;12345&quot;
+}
+</code></pre>
+<h3 id="respuesta-exitosa_1">✅ Respuesta exitosa</h3>
+<pre><code class="language-json">HTTP/1.1 200 OK
+{
+    &quot;message&quot;: &quot;Login successful&quot;,
+    &quot;data&quot;: {
+        &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWJpbzJAZ21haWwuY29tIiwiaWF0IjoxNzUyNDYzMjI3LCJleHAiOjE3NTYwNjMyMjd9.XdcoWN0VWruCjcKJszMbQS9Njcfl8srNPkCLUnJqi08&quot;
+    }
+}
+</code></pre>
+<h3 id="respuestas-posibles-errores_1">❌ Respuestas posibles errores</h3>
+<pre><code class="language-json">HTTP/1.1 400 Bad Request
+{
+    &quot;message&quot;: &quot;Invalid input&quot;,
+    &quot;data&quot;: {
+        &quot;identifier&quot;: &quot;Identifier is required&quot;,
+        &quot;password&quot;: &quot;Password is required&quot;
+    }
+}
+</code></pre>
+<pre><code class="language-json">HTTP/1.1 401 Unauthorized
+{
+    &quot;message&quot;: &quot;Invalid credentials&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+<pre><code class="language-json">HTTP/1.1 500 Internal Server Error
+{
+    &quot;message&quot;: &quot;An unexpected error occurred&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+<hr />
+<h2 id="acceder-a-rutas-protegidas">🧪 Acceder a rutas protegidas</h2>
+<p>Para acceder a rutas protegidas, el cliente debe enviar el token JWT en el encabezado <code>Authorization</code> de la siguiente manera:</p>
+<pre><code class="language-http">Authorization: Bearer &lt;token&gt;
+</code></pre>
+<hr />
+<h2 id="duracion-del-token">📆 Duración del token</h2>
+<p>Los tokens se configuran para expirar automáticamente después de cierto tiempo (ej. 24 horas).</p>
+<p>Se define en application.properties</p>
+<pre><code class="language-properties">jwt.expiration=86400000 # 24 horas en milisegundos
+</code></pre>
+<hr />
+<h2 id="roles-y-permisos">🔐 Roles y permisos</h2>
+<p>MiniTweet usa control por roles para limitar el acceso:</p>
+<table>
+<thead>
+<tr>
+<th>Rol</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USER</td>
+<td>Usuario normal, puede ver y publicar</td>
+</tr>
+<tr>
+<td>ADMIN</td>
+<td>Acceso total: puede gestionar usuarios</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Los roles son validados automáticamente por Spring Security con anotaciones como @PreAuthorize("hasRole('ADMIN')").</p>
+</blockquote>
+<hr />
+<h2 id="notas-importantes">📌 Notas importantes</h2>
+<p>✅ Guarda el token localmente (por ejemplo, en localStorage si usas frontend).
+❌ No compartas tu token ni lo expongas en URLs.
+🔁 Si el token expira, el usuario debe volver a iniciar sesión.</p>
+<hr />
+<h3 id="te-gustaria-ver-como-manejar-errores-de-autenticacion-o-como-construir-filtros-personalizados">¿Te gustaría ver cómo manejar errores de autenticación o cómo construir filtros personalizados?</h3>
+<p>➡️ Revisa la sección de <a href="../error-handling/">Manejo de Errores</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "content.code.copy", "content.tabs.link", "search.suggest", "search.highlight", "toc.integrate", "header.autohide"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1083 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación clara y accesible para el backend en Spring Boot.">
+      
+      
+        <meta name="author" content="Fabio Hernandez">
+      
+      
+        <link rel="canonical" href="https://tusitio.com/docs/endpoints/users/">
+      
+      
+        <link rel="prev" href="../followers/">
+      
+      
+        <link rel="next" href="../../database/">
+      
+      
+      <link rel="icon" href="../../assets/images/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>👤 Usuarios - Documentación API - MiniTweet API</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#endpoints-de-usuarios" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Documentación API - MiniTweet API" class="md-header__button md-logo" aria-label="Documentación API - MiniTweet API" data-md-component="logo">
+      
+  <img src="../../assets/icons/social-red.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentación API - MiniTweet API
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              👤 Usuarios
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentación API - MiniTweet API" class="md-nav__button md-logo" aria-label="Documentación API - MiniTweet API" data-md-component="logo">
+      
+  <img src="../../assets/icons/social-red.svg" alt="logo">
+
+    </a>
+    Documentación API - MiniTweet API
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🏠 Inicio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚀 Introducción
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📦 Empezar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🏗️ Arquitectura
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🔐 Autenticación
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🚨 Errores
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    📡 Endpoints
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            📡 Endpoints
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    📝 Introducción
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../posts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ✏️ Publicaciones
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../comments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    💬 Comentarios
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../followers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    👥 Followers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    👤 Usuarios
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    👤 Usuarios
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#obtener-informacion-del-usuario-autenticado" class="md-nav__link">
+    <span class="md-ellipsis">
+      👁️ Obtener información del usuario autenticado
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="👁️ Obtener información del usuario autenticado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listar-todos-los-usuarios-solo-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Listar todos los usuarios (solo Admin)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Listar todos los usuarios (solo Admin)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buscar-usuario-por-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔍 Buscar usuario por ID
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Buscar usuario por ID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametro-de-ruta" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛣️ Parámetro de ruta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizar-roles-de-un-usuario-solo-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔁 Actualizar roles de un usuario (solo Admin)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔁 Actualizar roles de un usuario (solo Admin)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requiere-autenticacion_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Requiere autenticación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametro-de-ruta_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛣️ Parámetro de ruta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acciones-posibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 Acciones posibles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuerpo-de-la-solicitud" class="md-nav__link">
+    <span class="md-ellipsis">
+      📥 Cuerpo de la solicitud
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-respuesta_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Ejemplo de respuesta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Notas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-de-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛡️ Notas de Seguridad
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛡️ Notas de Seguridad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-autenticar-un-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿ Como autenticar un usuario?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    🧬 Base de datos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ❓ FAQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="endpoints-de-usuarios">👤 Endpoints de Usuarios</h1>
+<p>La API de MiniTweet permite consultar la información del usuario autenticado, buscar otros usuarios, listar todos los usuarios (para administradores) y asignar roles.</p>
+<hr />
+<h2 id="obtener-informacion-del-usuario-autenticado">👁️ Obtener información del usuario autenticado</h2>
+<p><strong><code>GET /api/users/me</code></strong></p>
+<p>Devuelve los datos del usuario actualmente autenticado.</p>
+<h3 id="requiere-autenticacion">🔐 Requiere autenticación</h3>
+<p><strong>Si</strong> Se requiere un token JWT valido.</p>
+<h3 id="ejemplo-de-respuesta">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">{
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+        &quot;username&quot;: &quot;hernandex2&quot;,
+        &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+        &quot;biography&quot;: null,
+        &quot;profilePicture&quot;: null,
+        &quot;accountNonExpired&quot;: false,
+        &quot;accountNonLocked&quot;: false,
+        &quot;authorities&quot;: [
+            {
+                &quot;authority&quot;: &quot;USER&quot;
+            }
+        ],
+        &quot;credentialsNonExpired&quot;: false,
+        &quot;enabled&quot;: true
+    }
+}
+</code></pre>
+<h3 id="notas">⚠️ Notas</h3>
+<ul>
+<li>El usuario debe estar autenticado para acceder a esta información.</li>
+</ul>
+<hr />
+<h2 id="listar-todos-los-usuarios-solo-admin">📋 Listar todos los usuarios (solo Admin)</h2>
+<p><strong><code>GET /api/users/all</code></strong></p>
+<p>Devuelve una lista de todos los usuarios en el sistema.</p>
+<h3 id="requiere-autenticacion_1">🔐 Requiere autenticación</h3>
+<p><strong>Si</strong> Se requiere un token JWT valido y tener el rol de ADMIN.</p>
+<h3 id="ejemplo-de-respuesta_1">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">{
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+            &quot;username&quot;: &quot;hernandex2&quot;,
+            &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+            &quot;biography&quot;: null,
+            &quot;profilePicture&quot;: null,
+            &quot;accountNonExpired&quot;: false,
+            &quot;accountNonLocked&quot;: false,
+            &quot;authorities&quot;: [
+                {
+                    &quot;authority&quot;: &quot;USER&quot;
+                }
+            ],
+            &quot;credentialsNonExpired&quot;: false,
+            &quot;enabled&quot;: true
+        }
+    ]
+}
+</code></pre>
+<h3 id="notas_1">⚠️ Notas</h3>
+<ul>
+<li>Solo los administradores pueden acceder a esta información.</li>
+<li>El usuario debe tener el rol de ADMIN para acceder a esta ruta.</li>
+</ul>
+<hr />
+<h2 id="buscar-usuario-por-id">🔍 Buscar usuario por ID</h2>
+<p><strong><code>GET /api/users/by-id/{id}</code></strong>
+Devuelve la información de un usuario específico por su ID.</p>
+<h3 id="requiere-autenticacion_2">🔐 Requiere autenticación</h3>
+<p><strong>Si</strong> Se requiere un token JWT valido y tener el rol de ADMIN.</p>
+<h3 id="parametro-de-ruta">🛣️ Parámetro de ruta</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>UUID</td>
+<td>ID del usuario a buscar</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ejemplo-de-respuesta_2">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">{
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: &quot;1f547782-79fc-4acf-9ab6-0a16bf1f0450&quot;,
+        &quot;username&quot;: &quot;hernandex2&quot;,
+        &quot;email&quot;: &quot;fabio2@gmail.com&quot;,
+        &quot;biography&quot;: null,
+        &quot;profilePicture&quot;: null,
+        &quot;accountNonExpired&quot;: false,
+        &quot;accountNonLocked&quot;: false,
+        &quot;authorities&quot;: [
+            {
+                &quot;authority&quot;: &quot;USER&quot;
+            }
+        ],
+        &quot;credentialsNonExpired&quot;: false,
+        &quot;enabled&quot;: true
+    }
+}
+</code></pre>
+<h3 id="notas_2">⚠️ Notas</h3>
+<ul>
+<li>El <code>id</code> debe ser un UUID válido de un usuario existente.</li>
+<li>Solo los administradores pueden acceder a esta información.</li>
+</ul>
+<hr />
+<h2 id="actualizar-roles-de-un-usuario-solo-admin">🔁 Actualizar roles de un usuario (solo Admin)</h2>
+<p><strong><code>PUT PUT /api/users/update/{userId}</code></strong>
+Permite modificar los roles de un usuario. Este endpoint solo puede ser utilizado por un administrador.</p>
+<h3 id="requiere-autenticacion_3">🔐 Requiere autenticación</h3>
+<p><strong>Si</strong> Se requiere un token JWT valido y tener el rol de ADMIN.</p>
+<h3 id="parametro-de-ruta_1">🛣️ Parámetro de ruta</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>userId</code></td>
+<td>UUID</td>
+<td>ID del usuario al que se le quieren actualizar los roles</td>
+</tr>
+</tbody>
+</table>
+<h3 id="acciones-posibles">📌 Acciones posibles</h3>
+<table>
+<thead>
+<tr>
+<th>Acción</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ADD</code></td>
+<td>Agrega un nuevo rol al usuario.</td>
+</tr>
+<tr>
+<td><code>REMOVE</code></td>
+<td>Elimina un rol existente del usuario.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cuerpo-de-la-solicitud">📥 Cuerpo de la solicitud</h3>
+<pre><code class="language-json">{
+    &quot;roleId&quot;:&quot;ADMIN&quot;,
+    &quot;action&quot;:&quot;ADD&quot;
+}
+</code></pre>
+<h3 id="ejemplo-de-respuesta_3">✅ Ejemplo de respuesta</h3>
+<pre><code class="language-json">HTTP/1.1 200 OK
+{
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: null
+}
+</code></pre>
+<h3 id="notas_3">⚠️ Notas</h3>
+<ul>
+<li>El <code>userId</code> debe ser un UUID válido de un usuario existente.</li>
+<li>Solo los administradores pueden acceder a esta información.</li>
+<li>El usuario debe tener permisos para modificar los roles de otros usuarios.</li>
+<li>El <code>roleId</code> debe ser un rol válido definido en el sistema (por ejemplo, <code>ADMIN</code>, <code>USER</code>).</li>
+<li>El <code>action</code> puede ser <code>ADD</code> o <code>REMOVE</code> para agregar o eliminar un rol respectivamente.</li>
+<li>Si se intenta agregar un rol que ya existe, no se realizará ninguna acción.</li>
+<li>Si se intenta eliminar un rol que no existe, no se realizará ninguna acción.</li>
+</ul>
+<hr />
+<h2 id="notas-de-seguridad">🛡️ Notas de Seguridad</h2>
+<ul>
+<li>El endpoint /me devuelve únicamente los datos del usuario autenticado.</li>
+<li>El endpoint /all solo está disponible para usuarios con rol ADMIN.</li>
+<li>Asegúrate de no exponer información sensible como contraseñas u otros datos privados en las respuestas.</li>
+</ul>
+<h3 id="como-autenticar-un-usuario">¿ Como autenticar un usuario?</h3>
+<p>Para ello tenemos la seccion de autenticación:
+<a href="../../authentication/">Autenticación</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "content.code.copy", "content.tabs.link", "search.suggest", "search.highlight", "toc.integrate", "header.autohide"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>
