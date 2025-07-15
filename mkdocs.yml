@@ -31,9 +31,9 @@ nav:
   - 🚨 Errores: error-handling.md
   - 📡 Endpoints:
       - 📝 Introducción: endpoints/introduction.md
-      - 👤 Usuarios: endpoints/users.md
       - ✏️ Publicaciones: endpoints/posts.md
       - 💬 Comentarios: endpoints/comments.md
+      - 👤 Usuarios: endpoints/users.md
       - 👥 Followers: endpoints/followers.md 
   - 🧬 Base de datos: database.md
   - 🛡️ Seguridad: security.md
