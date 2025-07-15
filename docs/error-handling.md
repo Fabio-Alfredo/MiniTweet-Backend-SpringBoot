@@ -149,7 +149,7 @@ public class GlobalErrorHandler {
 
 ---
 ### ¿Listo para probar la API?
-Para más detalles sobre cómo autenticarte y manejar errores, revisa la sección de [Autenticación](authentication.md) y [Endpoints](/docs/endpoints/introduction.md).
+Para más detalles sobre cómo autenticarte y manejar errores, revisa la sección de [Autenticación](authentication.md) y [Endpoints](endpoints/introduction.md).
 
 
 

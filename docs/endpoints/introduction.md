@@ -44,7 +44,7 @@ Authorization: Bearer <tu-token-jwt>
 ## 🧭 Accesos rápidos
 Haz clic en los módulos para navegar directamente:
 
-- [🔒 Autenticación](/docs/authentication.md)
+- [🔒 Autenticación](../authentication.md)
 - [💬 Comentarios](comments.md)
 - [👨‍🦲 Followers](followers.md)
 - [✏️ Publicaciones](posts.md)

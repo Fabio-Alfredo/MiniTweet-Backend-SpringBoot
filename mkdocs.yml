@@ -36,6 +36,4 @@ nav:
       - 👥 Followers: endpoints/followers.md
       - 👤 Usuarios: endpoints/users.md 
   - 🧬 Base de datos: database.md
-  - 🛡️ Seguridad: security.md
-  - 📄 Cambios: changelog.md
   - ❓ FAQ: faq.md

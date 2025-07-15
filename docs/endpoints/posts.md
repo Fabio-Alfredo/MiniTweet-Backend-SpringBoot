@@ -141,29 +141,6 @@ HTTP/1.1 200 OK
                 "id": "1f547782-79fc-4acf-9ab6-0a16bf1f0450",
                 "username": "hernandex2",
                 "email": "fabio2@gmail.com",
-                "password": "$2a$10$mu4K78j.02JOnRaVD4lSqeSan2nd3I7.vKH31G7MYbNiopgHcf3jK",
-                "biography": null,
-                "profilePicture": null,
-                "tokens": [
-                    {
-                        "code": "a306b1b4-fa3d-465e-a76a-2dad504df965",
-                        "content": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWJpbzJAZ21haWwuY29tIiwiaWF0IjoxNzUyNDYzMjI3LCJleHAiOjE3NTYwNjMyMjd9.XdcoWN0VWruCjcKJszMbQS9Njcfl8srNPkCLUnJqi08",
-                        "timestamp": "2025-07-14T03:20:27.116+00:00",
-                        "active": true
-                    },
-                    {
-                        "code": "34ae56a5-3e91-47e9-a219-8dad2ddaf50d",
-                        "content": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWJpbzJAZ21haWwuY29tIiwiaWF0IjoxNzUyNTM5MDc5LCJleHAiOjE3NTYxMzkwNzl9.GyFyk8jpRBdQgz9t3CmGDSeOfVwp6X1ChhnipotZu44",
-                        "timestamp": "2025-07-15T00:24:39.247+00:00",
-                        "active": true
-                    }
-                ],
-                "roles": [
-                    {
-                        "id": "USER",
-                        "name": "usuario"
-                    }
-                ],
                 "authorities": [
                     {
                         "authority": "USER"
@@ -185,29 +162,6 @@ HTTP/1.1 200 OK
                 "id": "1f547782-79fc-4acf-9ab6-0a16bf1f0450",
                 "username": "hernandex2",
                 "email": "fabio2@gmail.com",
-                "password": "$2a$10$mu4K78j.02JOnRaVD4lSqeSan2nd3I7.vKH31G7MYbNiopgHcf3jK",
-                "biography": null,
-                "profilePicture": null,
-                "tokens": [
-                    {
-                        "code": "a306b1b4-fa3d-465e-a76a-2dad504df965",
-                        "content": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWJpbzJAZ21haWwuY29tIiwiaWF0IjoxNzUyNDYzMjI3LCJleHAiOjE3NTYwNjMyMjd9.XdcoWN0VWruCjcKJszMbQS9Njcfl8srNPkCLUnJqi08",
-                        "timestamp": "2025-07-14T03:20:27.116+00:00",
-                        "active": true
-                    },
-                    {
-                        "code": "34ae56a5-3e91-47e9-a219-8dad2ddaf50d",
-                        "content": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWJpbzJAZ21haWwuY29tIiwiaWF0IjoxNzUyNTM5MDc5LCJleHAiOjE3NTYxMzkwNzl9.GyFyk8jpRBdQgz9t3CmGDSeOfVwp6X1ChhnipotZu44",
-                        "timestamp": "2025-07-15T00:24:39.247+00:00",
-                        "active": true
-                    }
-                ],
-                "roles": [
-                    {
-                        "id": "USER",
-                        "name": "usuario"
-                    }
-                ],
                 "authorities": [
                     {
                         "authority": "USER"
@@ -445,4 +399,4 @@ HTTP/1.1 200 OK
 - El endpoint /following/all permite paginación con fecha para obtener posts recientes de seguidores.
 
 ### ¿Quieres ver cómo gestionar comentarios?
-➡️ Próximo paso: [Gestionar comentarios](/docs/endpoints/comments.md)
+➡️ Próximo paso: [Gestionar comentarios](comments.md)

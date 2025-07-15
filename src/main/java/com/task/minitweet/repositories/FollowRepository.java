@@ -21,6 +21,9 @@ public interface FollowRepository extends JpaRepository<Follow, UUID> {
     @Query("SELECT f.followed FROM Follow f WHERE f.follower =:user")
     List<User>findFollowingOf(@Param("user") User user);
 
+    //Elimina el seguimiento de un usuario a otro
+    void deleteByFollowerAndFollowed(User follower, User followed);
+
     //Devuelve true si el usuario ya sigue a otro
     Boolean existsByFollowerAndFollowed(User follower, User followed);
 }

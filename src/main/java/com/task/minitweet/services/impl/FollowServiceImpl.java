@@ -39,7 +39,9 @@ public class FollowServiceImpl implements FollowService {
             User followedEntity = userService.findById(followed);
 
             if(followRepository.existsByFollowerAndFollowed(follower, followedEntity)){
-                throw new HttpError(HttpStatus.CONFLICT, "You already follow this user");
+                //quiero eliminar el seguimiento
+                followRepository.deleteByFollowerAndFollowed(follower, followedEntity);
+
             }
 
             Follow follow = new Follow();

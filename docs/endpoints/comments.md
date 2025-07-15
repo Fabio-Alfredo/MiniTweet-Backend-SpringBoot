@@ -126,4 +126,6 @@ HTTP/1.1 200 OK
 - Los comentarios se muestran en orden cronológico por defecto.
 - Puedes mostrar los comentarios en tu cliente ordenados por fecha o relevancia.
 
+---
+
 ### Conozcamos un poco  de los seguidores de los usuarios en la siguiente sección: [👨‍🦲 Followers](followers.md)
